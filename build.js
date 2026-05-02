@@ -14,6 +14,7 @@ const PAGES = [
   { file: 'order.html',     headerFrom: 373, headerTo: 386,     footerFrom: 543, footerTo: 551,     footerHasClass: false },
   { file: 'contact.html',   headerFrom: 61,  headerTo: 67,      footerFrom: 125, footerTo: 130,     footerHasClass: false },
   { file: 'login.html',     headerFrom: 35,  headerTo: 39,      footerFrom: 98,  footerTo: 103,     footerHasClass: false },
+  { file: 'register.html',  headerFrom: 53,  headerTo: 57,      footerFrom: 110, footerTo: 115,     footerHasClass: false },
 ];
 
 for (const page of PAGES) {
