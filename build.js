@@ -2,59 +2,61 @@ const fs = require('fs');
 const path = require('path');
 
 const COMPONENTS_DIR = path.join(__dirname, 'components');
-const HEADER = fs.readFileSync(path.join(COMPONENTS_DIR, 'header.html'), 'utf8').trim();
-const FOOTER = fs.readFileSync(path.join(COMPONENTS_DIR, 'footer.html'), 'utf8').trim();
+const HEADER_HTML = fs.readFileSync(path.join(COMPONENTS_DIR, 'header.html'), 'utf8').trim();
+const FOOTER_HTML = fs.readFileSync(path.join(COMPONENTS_DIR, 'footer.html'), 'utf8').trim();
 
-// 頁面列表：{ file, headerFrom, headerTo, footerFrom, footerTo }
-// line numbers 是 1-indexed
 const PAGES = [
-  { file: 'index.html',     headerFrom: 413, headerTo: 428,     footerFrom: 546, footerTo: 557,     footerHasClass: true },
-  { file: 'product.html',   headerFrom: 411, headerTo: 424,     footerFrom: 535, footerTo: 543,     footerHasClass: false },
-  { file: 'about.html',     headerFrom: 467, headerTo: 480,     footerFrom: 603, footerTo: 611,     footerHasClass: false },
-  { file: 'order.html',     headerFrom: 373, headerTo: 386,     footerFrom: 543, footerTo: 551,     footerHasClass: false },
-  { file: 'contact.html',   headerFrom: 61,  headerTo: 67,      footerFrom: 125, footerTo: 130,     footerHasClass: false },
-  { file: 'login.html',     headerFrom: 35,  headerTo: 39,      footerFrom: 98,  footerTo: 103,     footerHasClass: false },
-  { file: 'register.html',  headerFrom: 53,  headerTo: 57,      footerFrom: 110, footerTo: 115,     footerHasClass: false },
-  { file: 'forgot.html',    headerFrom: 55,  headerTo: 59,      footerFrom: 114, footerTo: 119,     footerHasClass: false },
+  { file: 'index.html',     footerId: 'contact' },
+  { file: 'product.html',   footerId: null },
+  { file: 'about.html',     footerId: null },
+  { file: 'order.html',     footerId: null },
+  { file: 'contact.html',   footerId: null },
+  { file: 'login.html',     footerId: null },
+  { file: 'register.html',  footerId: null },
+  { file: 'forgot.html',    footerId: null },
 ];
 
 for (const page of PAGES) {
   const filePath = path.join(__dirname, page.file);
-  let lines = fs.readFileSync(filePath, 'utf8').split('\n');
+  let html = fs.readFileSync(filePath, 'utf8');
 
-  // 替換 header
-  let beforeHeader = lines.slice(0, page.headerFrom - 1);
-  let afterHeader = lines.slice(page.headerTo); // line after </header>
+  // === Replace header ===
+  // Match: <header class="nav"> ... </header>
+  // But we need to find it AFTER the body tag to avoid matching CSS
+  const bodyOpen = html.indexOf('<body');
+  const bodyClose = html.indexOf('</body>');
+  const bodyContent = html.slice(bodyOpen, bodyClose);
 
-  // 替換 footer
-  const footerEnd = page.footerTo;
-  // 找到 footer 之後的內容（footer 後面可能有空行或其它）
-  let beforeFooter = lines.slice(0, page.footerFrom - 1);
-  let afterFooter = lines.slice(footerEnd); // line after </footer>
+  const headerStartInBody = bodyContent.indexOf('<header class="nav">');
+  if (headerStartInBody === -1) {
+    console.log(`❌ ${page.file}: header not found`);
+    continue;
+  }
+  const headerEndInBody = bodyContent.indexOf('</header>', headerStartInBody) + '</header>'.length;
 
-  // 重組：beforeHeader + HEADER + afterHeader 剩下的（從 header 後到 footer 前）
-  // 先從原始 lines 取出 header 和 footer 之間的內容
-  let middleContent = lines.slice(page.headerTo, page.footerFrom - 1);
+  // Replace footer: find it INSIDE body content (after header, before </body>)
+  const searchStart = headerEndInBody;
+  const footerTagStart = bodyContent.lastIndexOf('<footer', bodyContent.length);
+  const footerTagEnd = bodyContent.indexOf('</footer>', footerTagStart) + '</footer>'.length;
 
-  // 組裝
-  let result = [
-    ...beforeHeader,
-    HEADER,
-    ...middleContent,
-    FOOTER,
-    ...afterFooter,
-  ];
-
-  // 如果是 index.html，footer 有 class="footer"，把 FOOTER 中的 <footer> 加上 class
-  if (page.footerHasClass) {
-    // 找到 FOOTER 在 result 中的位置並替換
-    const footerIdx = result.indexOf(FOOTER);
-    if (footerIdx !== -1) {
-      result[footerIdx] = FOOTER.replace('<footer>', '<footer class="footer" id="contact">');
-    }
+  if (footerTagStart === -1 || footerTagEnd === -1) {
+    console.log(`❌ ${page.file}: footer not found`);
+    continue;
   }
 
-  fs.writeFileSync(filePath, result.join('\n'), 'utf8');
+  const beforeHeader = bodyContent.slice(0, headerStartInBody);
+  const middle = bodyContent.slice(headerEndInBody, footerTagStart);
+  const afterFooter = bodyContent.slice(footerTagEnd);
+
+  let finalFooter = FOOTER_HTML;
+  if (page.footerId) {
+    finalFooter = FOOTER_HTML.replace('<footer>', `<footer class="footer" id="${page.footerId}">`);
+  }
+
+  const newBody = beforeHeader + HEADER_HTML + middle + finalFooter + afterFooter;
+  const result = html.slice(0, bodyOpen) + newBody + html.slice(bodyClose);
+
+  fs.writeFileSync(filePath, result, 'utf8');
   console.log(`✅ ${page.file} updated`);
 }
 
