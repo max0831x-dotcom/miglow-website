@@ -1,10 +1,12 @@
-const fades = document.querySelectorAll('.fade');
+function toggleMenu(){
+ const menu = document.getElementById('menu');
+ menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
 
-window.addEventListener('scroll', () => {
- fades.forEach(el => {
- const top = el.getBoundingClientRect().top;
- if(top < window.innerHeight - 100){
- el.classList.add('show');
- }
- });
-});
+function openLogin(){
+ document.getElementById('loginModal').style.display = 'block';
+}
+
+function closeLogin(){
+ document.getElementById('loginModal').style.display = 'none';
+}
