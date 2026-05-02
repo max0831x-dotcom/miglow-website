@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>微光 MI GLOW｜關於我們</title>
+  <style>
+    :root {
+      --bg: #fbf8f3;
+      --cream: #fffaf4;
+      --text: #756a62;
+      --muted: #9d928a;
+      --dark: #5e554d;
+      --line: #eadfd6;
+      --pink: #d9a89c;
+      --pink-soft: #f7ddd7;
+      --beige: #ead7c7;
+      --shadow: 0 22px 70px rgba(110, 82, 60, .12);
+      --serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+      --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      letter-spacing: .08em;
+      background: linear-gradient(180deg, #fffdf9 0%, var(--bg) 58%, #fffaf4 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .nav {
+      height: 118px;
+      padding: 0 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 252, 248, .9);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(234, 223, 214, .65);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .logo .zh {
+      font-family: var(--serif);
+      font-size: 36px;
+      letter-spacing: .2em;
+      color: #74706b;
+      line-height: 1;
+      margin-bottom: 13px;
+    }
+    .logo .en {
+      font-family: Georgia, serif;
+      font-size: 13px;
+      letter-spacing: .62em;
+      color: #8d8882;
+    }
+    .menu {
+      display: flex;
+      gap: 46px;
+      font-family: var(--serif);
+      font-size: 15px;
+      color: #675f58;
+    }
+    .menu a.active {
+      color: #b5877b;
+      position: relative;
+    }
+    .menu a.active::after {
+      content: "";
+      width: 58px;
+      height: 1px;
+      background: #cfa095;
+      position: absolute;
+      left: 50%;
+      bottom: -17px;
+      transform: translateX(-50%);
+    }
+    .icons { display: flex; gap: 24px; font-size: 24px; color: #6d665f; }
+
+    .hero {
+      min-height: 455px;
+      padding: 70px 7vw;
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      align-items: center;
+      gap: 56px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 70% 18%, rgba(255,255,255,.72), transparent 32%),
+        linear-gradient(112deg, #f6ebe3 0%, #fffaf5 48%, #ead8cb 100%);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(116deg, transparent 0 46%, rgba(255,255,255,.52) 46.3% 47%, transparent 47.4%);
+      pointer-events: none;
+    }
+    .hero-copy, .hero-visual { position: relative; z-index: 1; }
+    .hero h1 {
+      margin: 0 0 28px;
+      font-family: var(--serif);
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 400;
+      color: #6d625a;
+      letter-spacing: .12em;
+    }
+    .short-line {
+      width: 72px;
+      height: 2px;
+      background: #cfa095;
+      margin-bottom: 30px;
+    }
+    .hero h2 {
+      margin: 0 0 28px;
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: #c08f83;
+      line-height: 1.8;
+    }
+    .hero p {
+      max-width: 520px;
+      margin: 0;
+      line-height: 2.25;
+      color: #766e68;
+      font-size: 15px;
+    }
+
+    .plate-scene {
+      min-height: 320px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+    .brand-box {
+      position: absolute;
+      right: 5vw;
+      top: 10px;
+      width: 255px;
+      height: 225px;
+      background: rgba(231, 210, 191, .55);
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 22px 55px rgba(90,70,55,.1);
+    }
+    .dish {
+      position: absolute;
+      width: 430px;
+      height: 155px;
+      bottom: 18px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #fffefb, #e7ded6);
+      box-shadow: inset 0 -15px 30px rgba(120,90,70,.1), 0 24px 55px rgba(94,72,55,.15);
+    }
+    .flowers {
+      position: absolute;
+      right: -20px;
+      bottom: 20px;
+      width: 240px;
+      height: 170px;
+      opacity: .65;
+    }
+    .flowers::before {
+      content: "✤ ✤ ✤ ✤ ✤";
+      position: absolute;
+      color: #d7c2aa;
+      font-size: 52px;
+      transform: rotate(-18deg);
+    }
+
+    .nougat-stack { position: relative; width: 350px; height: 270px; z-index: 2; }
+    .cube {
+      position: absolute;
+      width: 132px;
+      height: 88px;
+      border-radius: 14px;
+      background: #f9e0dd;
+      box-shadow: 0 18px 25px rgba(95,69,48,.14), inset 0 -10px 16px rgba(120,70,50,.08);
+      overflow: hidden;
+    }
+    .cube::before, .cube::after, .cube span, .cube b, .cube i {
+      content: "";
+      display: block;
+      position: absolute;
+      border-radius: 999px;
+    }
+    .cube::before { width: 32px; height: 18px; left: 18px; top: 18px; background: #d85863; transform: rotate(-20deg); }
+    .cube::after { width: 26px; height: 20px; right: 22px; top: 26px; background: #e88c94; transform: rotate(18deg); }
+    .cube span { width: 28px; height: 17px; left: 68px; top: 54px; background: #f4c8b0; transform: rotate(12deg); }
+    .cube b { width: 22px; height: 18px; left: 88px; top: 16px; background: #df7d82; transform: rotate(-28deg); }
+    .cube i { width: 22px; height: 20px; right: 15px; bottom: 12px; background: #c64c59; transform: rotate(25deg); }
+    .choco { background: #735241; }
+    .choco::before, .choco::after, .choco span, .choco b, .choco i { background: #efd2b2; }
+    .plain { background: #fff0da; }
+    .plain::before, .plain::after, .plain span, .plain b, .plain i { background: #d7a960; }
+    .c1 { left: 110px; top: 4px; z-index: 5; }
+    .c2 { left: 38px; top: 83px; z-index: 4; }
+    .c3 { left: 160px; top: 83px; z-index: 4; }
+    .c4 { left: 83px; top: 160px; z-index: 3; }
+
+    .wrap { max-width: 1320px; margin: 0 auto; padding: 58px 6vw 0; }
+
+    .story {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 58px;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+    .photo-card {
+      min-height: 360px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #f7eee8, #fffaf5);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+    .photo-card::before {
+      content: "";
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: rgba(224, 183, 171, .3);
+      left: 46px;
+      top: 58px;
+      filter: blur(4px);
+    }
+    .hands {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(180deg, #d5b59d, #f0d7c6);
+      clip-path: polygon(35% 0, 47% 0, 45% 100%, 35% 100%, 30% 40%, 0 0, 100% 0, 68% 42%, 62% 100%, 53% 100%, 54% 0, 65% 0, 100% 0, 100% 0);
+      opacity: .38;
+    }
+    .ingredients {
+      position: absolute;
+      left: 44px;
+      bottom: 36px;
+      display: flex;
+      gap: 12px;
+    }
+    .fruit, .bowl {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #d85a5d;
+      box-shadow: inset -6px -8px 0 rgba(130,40,40,.08);
+    }
+    .bowl { background: #cfa070; }
+    .photo-card .nougat-stack { transform: scale(.78); }
+
+    .story-copy { position: relative; padding: 20px 20px 20px 0; }
+    .story-copy::after {
+      content: "✤ ✤ ✤";
+      position: absolute;
+      right: 8px;
+      bottom: -12px;
+      color: #d9c6b0;
+      font-size: 56px;
+      opacity: .42;
+      transform: rotate(-18deg);
+    }
+    .section-label {
+      font-family: var(--serif);
+      color: #a9897e;
+      margin-bottom: 24px;
+      padding-left: 18px;
+      border-left: 4px solid #d5a095;
+    }
+    .story-copy h2 {
+      margin: 0 0 26px;
+      font-family: var(--serif);
+      font-size: 34px;
+      font-weight: 400;
+      color: #625951;
+      letter-spacing: .12em;
+    }
+    .story-copy p {
+      max-width: 560px;
+      line-height: 2.18;
+      margin: 0;
+      color: #756d66;
+      font-size: 15px;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(234,223,214,.84);
+      border-radius: 24px;
+      box-shadow: 0 16px 50px rgba(110,82,60,.08);
+      overflow: hidden;
+      margin-bottom: 58px;
+    }
+    .value {
+      min-height: 176px;
+      padding: 32px 24px;
+      text-align: center;
+      border-right: 1px solid var(--line);
+    }
+    .value:last-child { border-right: 0; }
+    .value .ico { font-size: 46px; color: #c89d8f; margin-bottom: 16px; }
+    .value h3 {
+      margin: 0 0 12px;
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: #665d55;
+    }
+    .value p { margin: 0; line-height: 1.9; font-size: 13px; color: #8d837b; }
+
+    .process-title {
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 34px;
+      font-weight: 400;
+      color: #6e645c;
+      margin: 0 0 42px;
+    }
+    .dot { color: #d5a095; margin: 0 28px; }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    .step { text-align: center; position: relative; }
+    .step:not(:last-child)::after {
+      content: "›";
+      position: absolute;
+      right: -22px;
+      top: 62px;
+      font-size: 34px;
+      color: #d0b4a5;
+      font-family: Georgia, serif;
+    }
+    .step-img {
+      height: 138px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #ead8cb, #fff8f0);
+      box-shadow: 0 12px 35px rgba(110,82,60,.1);
+      margin-bottom: 28px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .num {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #d6a396;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-family: Georgia, serif;
+      z-index: 3;
+      border: 4px solid #fffaf4;
+    }
+    .step h3 {
+      margin: 0 0 12px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 19px;
+      color: #6e645c;
+    }
+    .step p { margin: 0; line-height: 1.85; font-size: 13px; color: #8d837b; }
+    .bowls { display: flex; gap: 8px; flex-wrap: wrap; width: 116px; justify-content: center; }
+    .bowls span { width: 42px; height: 32px; border-radius: 50%; background: #d2a16d; }
+    .pot { width: 110px; height: 70px; border-radius: 8px 8px 42px 42px; background: #f5eee7; border: 2px solid #dac7b8; position: relative; }
+    .pot::after { content: ""; position: absolute; width: 110px; height: 16px; border-radius: 50%; background: #d7b48d; left: 0; top: 12px; }
+    .sheet { width: 120px; height: 86px; border-radius: 10px; background: #f8e1dc; display: grid; grid-template-columns: repeat(3,1fr); gap: 4px; padding: 8px; }
+    .sheet span { background: rgba(203,99,102,.45); border-radius: 6px; }
+    .cut { width: 132px; height: 88px; border-radius: 9px; background: #f2d4b5; display: grid; grid-template-columns: repeat(4,1fr); grid-template-rows: repeat(3,1fr); gap: 3px; padding: 6px; }
+    .cut span { background: rgba(255,255,255,.38); border-radius: 4px; }
+    .box { width: 130px; height: 82px; border-radius: 8px; background: #f0dac5; border: 2px solid #d8bca6; position: relative; }
+    .box::after { content: ""; position: absolute; inset: 14px; border-radius: 4px; background: rgba(255,255,255,.55); }
+
+    .service-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(234,223,215,.88);
+      border-radius: 24px;
+      box-shadow: 0 16px 50px rgba(110,82,60,.08);
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+    .service {
+      min-height: 112px;
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 22px 30px;
+      border-right: 1px solid var(--line);
+    }
+    .service:last-child { border-right: 0; }
+    .service .ico { font-size: 38px; color: #c39a8d; }
+    .service strong { display: block; font-family: var(--serif); font-weight: 400; color: #70655d; margin-bottom: 6px; }
+    .service span { font-size: 12px; color: #a2978f; }
+
+    footer {
+      padding: 48px 20px 58px;
+      text-align: center;
+      color: #8e857e;
+      position: relative;
+      overflow: hidden;
+    }
+    footer::after {
+      content: "✤ ✤ ✤";
+      position: absolute;
+      right: 8vw;
+      bottom: 38px;
+      color: #d8c5ae;
+      font-size: 50px;
+      opacity: .55;
+      transform: rotate(-22deg);
+    }
+    .social { display: flex; justify-content: center; gap: 16px; margin: 18px 0 24px; }
+    .social a { width: 38px; height: 38px; border-radius: 50%; background: #eee6dd; display: grid; place-items: center; font-size: 12px; }
+    .footer-menu { display: flex; justify-content: center; gap: 36px; font-family: var(--serif); font-size: 14px; margin-bottom: 24px; }
+
+    @media (max-width: 1000px) {
+      .menu { display: none; }
+      .hero, .story { grid-template-columns: 1fr; }
+      .hero-copy { text-align: center; }
+      .short-line { margin-left: auto; margin-right: auto; }
+      .brand-box { display: none; }
+      .values, .service-bar { grid-template-columns: 1fr 1fr; }
+      .process { grid-template-columns: 1fr 1fr; }
+      .step:not(:last-child)::after { display: none; }
+    }
+    @media (max-width: 560px) {
+      body { letter-spacing: .04em; }
+      .nav { height: auto; padding: 22px 5vw; }
+      .logo .zh { font-size: 28px; }
+      .logo .en { font-size: 11px; }
+      .hero { padding: 52px 6vw; }
+      .hero h1 { font-size: 36px; }
+      .plate-scene { min-height: 280px; transform: scale(.82); }
+      .story-copy h2 { font-size: 28px; }
+      .values, .process, .service-bar { grid-template-columns: 1fr; }
+      .value, .service { border-right: 0; border-bottom: 1px solid var(--line); }
+      .footer-menu { flex-wrap: wrap; gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="index.html">
+      <div class="zh">微 光</div>
+      <div class="en">MI GLOW</div>
+    </a>
+    <nav class="menu">
+      <a href="index.html">首頁</a>
+      <a href="product.html">商品介紹</a>
+      <a class="active" href="#">關於我們</a>
+      <a href="#">訂購須知</a>
+      <a href="#">聯絡我們</a>
+    </nav>
+    <div class="icons"><span>♡</span><span>♙</span><span>🛍</span></div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>關於 微光</h1>
+      <div class="short-line"></div>
+      <h2>甜在心裡的幸福，從微光開始</h2>
+      <p>
+        微光，來自於對甜點最純粹的熱愛。<br>
+        我們相信，真正的美味來自簡單的食材、用心的製作，
+        以及想傳遞幸福的心意。每一塊雪花酥，都是我們想與你分享的微小美好。
+      </p>
+    </div>
+    <div class="hero-visual">
+      <div class="plate-scene">
+        <div class="brand-box">
+          <div class="logo">
+            <div class="zh">微 光</div>
+            <div class="en">MI GLOW</div>
+          </div>
+        </div>
+        <div class="dish"></div>
+        <div class="nougat-stack">
+          <div class="cube c1"><span></span><b></b><i></i></div>
+          <div class="cube choco c2"><span></span><b></b><i></i></div>
+          <div class="cube plain c3"><span></span><b></b><i></i></div>
+          <div class="cube c4"><span></span><b></b><i></i></div>
+        </div>
+        <div class="flowers"></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <section class="story">
+      <div class="photo-card">
+        <div class="hands"></div>
+        <div class="nougat-stack">
+          <div class="cube c1"><span></span><b></b><i></i></div>
+          <div class="cube choco c2"><span></span><b></b><i></i></div>
+          <div class="cube plain c3"><span></span><b></b><i></i></div>
+          <div class="cube c4"><span></span><b></b><i></i></div>
+        </div>
+        <div class="ingredients"><div class="fruit"></div><div class="fruit"></div><div class="bowl"></div></div>
+      </div>
+      <div class="story-copy">
+        <div class="section-label">品牌故事</div>
+        <h2>一份想分享的心意</h2>
+        <p>
+          微光誕生於一個平凡卻溫暖的廚房。創辦人熱愛甜點，
+          也喜歡將這份甜蜜分享給身邊的人。在無數次的嘗試與調整後，
+          我們找到了最單純也最令人安心的配方，並把這份幸福，
+          做成每一塊雪花酥。希望在你忙碌的日常裡，微光能成為那一點點讓心變柔軟的甜。
+        </p>
+      </div>
+    </section>
+
+    <section class="values">
+      <article class="value">
+        <div class="ico">☘</div>
+        <h3>嚴選食材</h3>
+        <p>挑選安心食材，天然原料，吃得安心、甜得放心。</p>
+      </article>
+      <article class="value">
+        <div class="ico">♡</div>
+        <h3>手工製作</h3>
+        <p>每一塊雪花酥皆手工製作，用心對待每一份甜點。</p>
+      </article>
+      <article class="value">
+        <div class="ico">♢</div>
+        <h3>品質把關</h3>
+        <p>嚴格把關製程與風味，只給你最好的味道。</p>
+      </article>
+      <article class="value">
+        <div class="ico">🎁</div>
+        <h3>美好心意</h3>
+        <p>無論是送禮或自用，都能傳遞溫柔的幸福。</p>
+      </article>
+    </section>
+
+    <h2 class="process-title"><span class="dot">•</span>製作流程<span class="dot">•</span></h2>
+
+    <section class="process">
+      <article class="step">
+        <div class="num">01</div>
+        <div class="step-img"><div class="bowls"><span></span><span></span><span></span><span></span></div></div>
+        <h3>嚴選食材</h3>
+        <p>精心挑選每一種食材，確保天然與新鮮。</p>
+      </article>
+      <article class="step">
+        <div class="num">02</div>
+        <div class="step-img"><div class="pot"></div></div>
+        <h3>用心熬煮</h3>
+        <p>以黃金比例熬煮牛奶糖，香濃不膩口。</p>
+      </article>
+      <article class="step">
+        <div class="num">03</div>
+        <div class="step-img"><div class="sheet"><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+        <h3>完美結合</h3>
+        <p>將餅乾、堅果與果乾拌入，每一口都豐富滿足。</p>
+      </article>
+      <article class="step">
+        <div class="num">04</div>
+        <div class="step-img"><div class="cut"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+        <h3>整形切塊</h3>
+        <p>手工整形並切塊，大小均勻，一口剛剛好。</p>
+      </article>
+      <article class="step">
+        <div class="num">05</div>
+        <div class="step-img"><div class="box"></div></div>
+        <h3>包裝出貨</h3>
+        <p>細心檢查後包裝，將甜蜜送到你手中。</p>
+      </article>
+    </section>
+
+    <section class="service-bar">
+      <div class="service"><div class="ico">♡</div><div><strong>手工製作</strong><span>用心製作每一份甜點</span></div></div>
+      <div class="service"><div class="ico">☘</div><div><strong>嚴選食材</strong><span>安心食材・吃得放心</span></div></div>
+      <div class="service"><div class="ico">🎁</div><div><strong>精美包裝</strong><span>送禮自用兩相宜</span></div></div>
+      <div class="service"><div class="ico">🚚</div><div><strong>快速出貨</strong><span>新鮮美味・快速送達</span></div></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="logo">
+      <div class="zh">微 光</div>
+      <div class="en">MI GLOW</div>
+    </div>
+    <div class="social"><a href="#">IG</a><a href="#">FB</a><a href="#">LINE</a></div>
+    <div class="footer-menu"><a href="index.html">首頁</a><a href="product.html">商品介紹</a><a href="about.html">關於我們</a><a href="#">訂購須知</a><a href="#">聯絡我們</a></div>
+    <div>© 2026 MI GLOW 微光甜點工作室 All Rights Reserved.</div>
+  </footer>
+</body>
+</html>
