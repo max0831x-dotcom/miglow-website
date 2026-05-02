@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>微光 MI GLOW｜聯絡我們</title>
+  <style>
+    :root{
+      --bg:#fbf8f3;--cream:#fffaf4;--text:#756a62;--muted:#9d928a;--dark:#5e554d;
+      --line:#eadfd6;--pink:#d4a094;--pink-soft:#f6ded9;--beige:#ead7c7;
+      --shadow:0 22px 70px rgba(110,82,60,.11);
+      --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+      --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--sans);color:var(--text);letter-spacing:.08em;background:linear-gradient(180deg,#fffdf9 0%,var(--bg) 62%,#fffaf4 100%)}
+    a{text-decoration:none;color:inherit}
+
+    .nav{height:118px;padding:0 6vw;display:flex;align-items:center;justify-content:space-between;background:rgba(255,252,248,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(234,223,214,.65);position:sticky;top:0;z-index:50}
+    .logo .zh{font-family:var(--serif);font-size:36px;letter-spacing:.2em;color:#74706b;line-height:1;margin-bottom:13px}
+    .logo .en{font-family:Georgia,serif;font-size:13px;letter-spacing:.62em;color:#8d8882}
+    .menu{display:flex;gap:46px;font-family:var(--serif);font-size:15px;color:#675f58}
+    .menu a.active{color:#b5877b;position:relative}
+    .menu a.active:after{content:"";width:58px;height:1px;background:#cfa095;position:absolute;left:50%;bottom:-17px;transform:translateX(-50%)}
+    .icons{display:flex;gap:24px;font-size:24px;color:#6d665f}
+
+    .hero{min-height:350px;padding:62px 7vw;display:grid;grid-template-columns:.72fr 1.28fr;align-items:center;gap:48px;position:relative;overflow:hidden;background:radial-gradient(circle at 72% 22%,rgba(255,255,255,.74),transparent 34%),linear-gradient(112deg,#f6ebe3 0%,#fffaf5 50%,#ead8cb 100%)}
+    .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(116deg,transparent 0 46%,rgba(255,255,255,.52) 46.3% 47%,transparent 47.4%)}
+    .hero-copy,.hero-visual{position:relative;z-index:1}
+    .hero h1{margin:0 0 22px;font-family:var(--serif);font-size:clamp(36px,4vw,48px);font-weight:400;color:#6d625a;letter-spacing:.12em}
+    .short-line{width:70px;height:2px;background:#cfa095;margin:0 0 28px}
+    .hero h2{margin:0 0 20px;font-family:var(--serif);font-size:22px;font-weight:400;color:#c08f83;line-height:1.8}
+    .hero p{max-width:520px;margin:0;line-height:2.1;color:#706861;font-size:15px}
+
+    .hero-scene{min-height:240px;display:grid;place-items:center;position:relative}
+    .brand-box{position:absolute;right:5vw;top:0;width:245px;height:205px;background:rgba(231,210,191,.52);border-radius:4px;display:grid;place-items:center;box-shadow:0 22px 55px rgba(90,70,55,.1)}
+    .dish{position:absolute;width:420px;height:145px;bottom:14px;border-radius:50%;background:linear-gradient(180deg,#fffefb,#e7ded6);box-shadow:inset 0 -15px 30px rgba(120,90,70,.1),0 24px 55px rgba(94,72,55,.15)}
+    .flowers{position:absolute;right:-20px;bottom:20px;width:220px;height:150px;opacity:.62}.flowers:before{content:"✤ ✤ ✤ ✤";position:absolute;color:#d7c2aa;font-size:50px;transform:rotate(-18deg)}
+
+    .nougat-stack{position:relative;width:350px;height:260px;z-index:2}.cube{position:absolute;width:132px;height:88px;border-radius:14px;background:#f9e0dd;box-shadow:0 18px 25px rgba(95,69,48,.14),inset 0 -10px 16px rgba(120,70,50,.08);overflow:hidden}.cube:before,.cube:after,.cube span,.cube b,.cube i{content:"";display:block;position:absolute;border-radius:999px}.cube:before{width:32px;height:18px;left:18px;top:18px;background:#d85863;transform:rotate(-20deg)}.cube:after{width:26px;height:20px;right:22px;top:26px;background:#e88c94;transform:rotate(18deg)}.cube span{width:28px;height:17px;left:68px;top:54px;background:#f4c8b0;transform:rotate(12deg)}.cube b{width:22px;height:18px;left:88px;top:16px;background:#df7d82;transform:rotate(-28deg)}.cube i{width:22px;height:20px;right:15px;bottom:12px;background:#c64c59;transform:rotate(25deg)}.choco{background:#735241}.choco:before,.choco:after,.choco span,.choco b,.choco i{background:#efd2b2}.plain{background:#fff0da}.plain:before,.plain:after,.plain span,.plain b,.plain i{background:#d7a960}.c1{left:110px;top:6px;z-index:5}.c2{left:38px;top:84px;z-index:4}.c3{left:160px;top:84px;z-index:4}.c4{left:83px;top:160px;z-index:3}
+
+    .wrap{max-width:1320px;margin:0 auto;padding:44px 6vw 0}.panel{border-radius:26px;background:rgba(255,255,255,.64);border:1px solid rgba(234,223,214,.78);box-shadow:var(--shadow)}
+    .contact-panel{display:grid;grid-template-columns:.78fr 1.22fr;gap:0;margin-bottom:34px;overflow:hidden}.info{padding:36px 50px;border-right:1px dashed #d8c7bd}.block-title{font-family:var(--serif);font-size:25px;font-weight:400;color:#625951;margin:0 0 18px}.title-line{width:62px;height:2px;background:#d3a196;margin-bottom:30px}
+    .contact-item{display:grid;grid-template-columns:78px 1fr;gap:22px;align-items:center;margin:0 0 32px}.contact-icon{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:#f0e7e0;color:#be9287;font-size:35px}.contact-item h3{margin:0 0 8px;font-family:var(--serif);font-weight:400;font-size:19px;color:#625951}.contact-item p{margin:0;line-height:1.85;color:#746a62;font-size:14px}.pill{display:inline-grid;place-items:center;min-width:118px;height:34px;border-radius:999px;background:#ead9cf;color:#ad8278;margin-top:8px;font-family:var(--serif);font-size:13px}
+
+    .form-area{padding:36px 50px}.form-area p{margin:0 0 24px;color:#746b64;line-height:1.9}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}input,select,textarea{width:100%;border:1px solid #decac0;background:rgba(255,255,255,.58);border-radius:14px;padding:18px 20px;font-family:var(--serif);font-size:15px;color:#766a62;outline:none;letter-spacing:.08em}textarea{min-height:160px;resize:vertical}.full{grid-column:1/-1}.send{margin-top:22px;width:100%;height:58px;border:0;border-radius:999px;background:linear-gradient(135deg,#ddb1a6,#c9988c);color:#fff;font-family:var(--serif);font-size:17px;letter-spacing:.18em;box-shadow:0 15px 30px rgba(190,139,122,.2);cursor:pointer}
+
+    .map-panel{display:grid;grid-template-columns:1.1fr .55fr .55fr;gap:0;overflow:hidden;margin-bottom:34px}.map{min-height:230px;background:#f4e9e2;position:relative;overflow:hidden}.map:before{content:"";position:absolute;inset:-20%;background:repeating-linear-gradient(35deg,transparent 0 42px,rgba(213,195,184,.55) 43px 45px),repeating-linear-gradient(125deg,transparent 0 56px,rgba(213,195,184,.38) 57px 59px);opacity:.55}.pin{position:absolute;left:45%;top:38%;width:36px;height:36px;background:#c89588;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 8px 18px rgba(160,105,95,.25)}.pin:after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:#fff;left:12px;top:12px}.map-label{position:absolute;left:51%;top:43%;font-family:Georgia,serif;letter-spacing:.18em;color:#b58b80;background:rgba(255,250,245,.72);padding:10px 14px;border-radius:999px}.visit{padding:40px 36px;background:rgba(255,255,255,.64);display:flex;flex-direction:column;justify-content:center}.visit h2{font-family:var(--serif);font-weight:400;font-size:26px;margin:0 0 18px;color:#6b6058}.visit p{margin:0 0 22px;line-height:2;color:#756c65;font-size:14px}.visit .pill{width:128px;height:40px}.store-img{min-height:230px;background:linear-gradient(135deg,#d8bfa8,#fff5eb);position:relative;display:grid;place-items:center}.storefront{width:170px;height:145px;background:#caa88c;border-radius:6px 6px 0 0;position:relative;box-shadow:0 18px 30px rgba(90,70,55,.12)}.storefront:before{content:"";position:absolute;left:20px;right:20px;top:30px;height:92px;background:linear-gradient(90deg,#f2e2d4 0 48%,#b48f72 49% 51%,#f2e2d4 52%);border:5px solid #8b715c}.storefront:after{content:"微 光";position:absolute;top:8px;left:0;right:0;text-align:center;color:#fff;font-family:var(--serif)}
+
+    .faq-title{text-align:center;font-family:var(--serif);font-size:30px;font-weight:400;color:#675d55;margin:36px 0 28px}.dot{color:#d3a196;margin:0 24px}.faq{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:34px}.faq-item{min-height:78px;border:1px solid #e5d5cc;background:rgba(255,255,255,.62);border-radius:14px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px}.faq-item strong{display:block;font-family:var(--serif);font-weight:400;color:#655b53;margin-bottom:8px}.faq-item span{font-size:13px;color:#92877f;line-height:1.6}.chev{font-size:26px;color:#c99b8f}
+
+    .service-bar{display:grid;grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.72);border:1px solid rgba(234,223,215,.88);border-radius:24px;box-shadow:0 16px 50px rgba(110,82,60,.08);overflow:hidden;margin-top:34px}.service{min-height:112px;display:grid;grid-template-columns:60px 1fr;gap:18px;align-items:center;padding:22px 30px;border-right:1px solid var(--line)}.service:last-child{border-right:0}.service .ico{font-size:38px;color:#c39a8d}.service strong{display:block;font-family:var(--serif);font-weight:400;color:#70655d;margin-bottom:6px}.service span{font-size:12px;color:#a2978f}
+
+    footer{padding:48px 20px 58px;text-align:center;color:#8e857e;position:relative;overflow:hidden}footer:after{content:"✤ ✤ ✤";position:absolute;right:8vw;bottom:38px;color:#d8c5ae;font-size:50px;opacity:.55;transform:rotate(-22deg)}.social{display:flex;justify-content:center;gap:16px;margin:18px 0 24px}.social a{width:38px;height:38px;border-radius:50%;background:#eee6dd;display:grid;place-items:center;font-size:12px}.footer-menu{display:flex;justify-content:center;gap:36px;font-family:var(--serif);font-size:14px;margin-bottom:24px}
+
+    @media(max-width:1000px){.menu{display:none}.hero,.contact-panel,.map-panel{grid-template-columns:1fr}.hero{text-align:center}.short-line{margin:0 auto 28px}.brand-box{display:none}.info{border-right:0;border-bottom:1px dashed #d8c7bd}.faq,.service-bar{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){body{letter-spacing:.04em}.nav{height:auto;padding:22px 5vw}.logo .zh{font-size:28px}.logo .en{font-size:11px}.hero{padding:48px 6vw}.hero-scene{transform:scale(.82);min-height:260px}.wrap{padding:34px 5vw 0}.info,.form-area{padding:30px 24px}.contact-item{grid-template-columns:1fr;text-align:center}.contact-icon{margin:auto}.form-grid,.faq,.service-bar{grid-template-columns:1fr}.service{border-right:0;border-bottom:1px solid var(--line)}.footer-menu{flex-wrap:wrap;gap:18px}}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="index.html"><div class="zh">微 光</div><div class="en">MI GLOW</div></a>
+    <nav class="menu">
+      <a href="index.html">首頁</a><a href="product.html">商品介紹</a><a href="about.html">關於我們</a><a href="order.html">訂購須知</a><a class="active" href="#">聯絡我們</a>
+    </nav>
+    <div class="icons"><span>♡</span><span>♙</span><span>🛍</span></div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>聯絡我們</h1><div class="short-line"></div>
+      <h2>有任何問題，歡迎與我們聯繫</h2>
+      <p>若您對產品、訂單、配送或其他問題有任何疑問，歡迎透過以下方式與我們聯繫，我們將盡快為您服務！</p>
+    </div>
+    <div class="hero-visual"><div class="hero-scene"><div class="brand-box"><div class="logo"><div class="zh">微 光</div><div class="en">MI GLOW</div></div></div><div class="dish"></div><div class="nougat-stack"><div class="cube c1"><span></span><b></b><i></i></div><div class="cube choco c2"><span></span><b></b><i></i></div><div class="cube plain c3"><span></span><b></b><i></i></div><div class="cube c4"><span></span><b></b><i></i></div></div><div class="flowers"></div></div></div>
+  </section>
+
+  <main class="wrap">
+    <section class="panel contact-panel">
+      <div class="info">
+        <h2 class="block-title">聯絡資訊</h2><div class="title-line"></div>
+        <div class="contact-item"><div class="contact-icon">☎</div><div><h3>電話</h3><p>（02）1234-5678<br>週一至週五 10:00 - 18:00</p></div></div>
+        <div class="contact-item"><div class="contact-icon">✉</div><div><h3>電子信箱</h3><p>info@miglow.com<br>我們將於 1-2 個工作天內回覆</p></div></div>
+        <div class="contact-item"><div class="contact-icon">LINE</div><div><h3>LINE 官方帳號</h3><p>@miglow<br>點擊加入 LINE 立即諮詢</p><a class="pill" href="#">加入好友 →</a></div></div>
+        <div class="contact-item"><div class="contact-icon">⌖</div><div><h3>工作室地址</h3><p>台北市大安區幸福路 123 巷 45 號 1 樓<br>近捷運忠孝復興站 2 號出口，步行約 5 分鐘</p></div></div>
+      </div>
+      <div class="form-area">
+        <h2 class="block-title">聯絡表單</h2><div class="title-line"></div>
+        <p>請填寫表單，我們會盡快與您聯繫！</p>
+        <form>
+          <div class="form-grid">
+            <input type="text" placeholder="您的姓名 *" required>
+            <input type="tel" placeholder="聯絡電話 *" required>
+            <input class="full" type="email" placeholder="電子信箱 *" required>
+            <select class="full" required><option value="">請選擇主旨</option><option>商品問題</option><option>訂單查詢</option><option>大量訂購</option><option>合作洽詢</option></select>
+            <textarea class="full" placeholder="您的訊息 *&#10;請輸入您想詢問的內容..." required></textarea>
+          </div>
+          <button class="send" type="submit">送出訊息　➤</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel map-panel">
+      <div class="map"><div class="pin"></div><div class="map-label">微光 MI GLOW</div></div>
+      <div class="visit"><h2>來店取貨／參觀</h2><p>歡迎提前預約來店取貨或參觀，感受微光手作甜點的美好。</p><a class="pill" href="#">預約來店 →</a></div>
+      <div class="store-img"><div class="storefront"></div></div>
+    </section>
+
+    <h2 class="faq-title"><span class="dot">•</span>常見問題<span class="dot">•</span></h2>
+    <section class="faq">
+      <div class="faq-item"><div><strong>Q：多久可以收到訂單？</strong><span>現貨商品下單後約 2-3 個工作天出貨，預購商品請依商品頁說明。</span></div><div class="chev">⌄</div></div>
+      <div class="faq-item"><div><strong>Q：商品有問題怎麼辦？</strong><span>如收到商品有瑕疵或運送過程中損壞，請 24 小時內與我們聯繫。</span></div><div class="chev">⌄</div></div>
+      <div class="faq-item"><div><strong>Q：可以指定配送日期嗎？</strong><span>可以！請於結帳備註欄填寫希望配送日期。</span></div><div class="chev">⌄</div></div>
+      <div class="faq-item"><div><strong>Q：可以大量訂購嗎？</strong><span>可以！企業團購、活動訂單歡迎與我們聯繫，我們提供專人服務。</span></div><div class="chev">⌄</div></div>
+    </section>
+
+    <section class="service-bar">
+      <div class="service"><div class="ico">☘</div><div><strong>嚴選食材</strong><span>安心食材・吃得放心</span></div></div>
+      <div class="service"><div class="ico">♡</div><div><strong>手工製作</strong><span>用心製作每一份甜點</span></div></div>
+      <div class="service"><div class="ico">🎁</div><div><strong>精美包裝</strong><span>送禮自用兩相宜</span></div></div>
+      <div class="service"><div class="ico">🚚</div><div><strong>快速出貨</strong><span>新鮮美味・快速送達</span></div></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="logo"><div class="zh">微 光</div><div class="en">MI GLOW</div></div>
+    <div class="social"><a href="#">IG</a><a href="#">FB</a><a href="#">LINE</a></div>
+    <div class="footer-menu"><a href="index.html">首頁</a><a href="product.html">商品介紹</a><a href="about.html">關於我們</a><a href="order.html">訂購須知</a><a href="contact.html">聯絡我們</a></div>
+    <div>© 2026 MI GLOW 微光甜點工作室 All Rights Reserved.</div>
+  </footer>
+</body>
+</html>
