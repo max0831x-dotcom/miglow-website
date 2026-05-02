@@ -1,79 +1,563 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>微光 MIGLOW</title>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>微光 MI GLOW｜雪花酥</title>
+ <style>
+ :root {
+ --bg: #fbf8f3;
+ --cream: #f4eadf;
+ --cream-2: #fffdf9;
+ --text: #766f69;
+ --dark: #5f5751;
+ --muted: #9a918a;
+ --line: #eadfd6;
+ --pink: #e9c1b7;
+ --pink-soft: #f9dfdc;
+ --brown: #9d7564;
+ --brown-soft: #d6b8a9;
+ --gold: #ddc7a6;
+ --shadow: 0 24px 60px rgba(116, 93, 76, .12);
+ --radius: 26px;
+ --serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+ --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+ }
 
-<link rel="stylesheet" href="css/style.css">
+ * { box-sizing: border-box; }
+
+ body {
+ margin: 0;
+ background: linear-gradient(180deg, #fffdf9 0%, var(--bg) 58%, #fffaf4 100%);
+ color: var(--text);
+ font-family: var(--sans);
+ letter-spacing: .08em;
+ }
+
+ a { color: inherit; text-decoration: none; }
+
+ .nav {
+ height: 118px;
+ padding: 0 6.4vw;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ background: rgba(255, 252, 247, .86);
+ backdrop-filter: blur(18px);
+ position: sticky;
+ top: 0;
+ z-index: 20;
+ border-bottom: 1px solid rgba(234, 223, 214, .55);
+ }
+
+ .logo { line-height: 1; }
+ .logo .zh {
+ font-family: var(--serif);
+ font-size: 36px;
+ letter-spacing: .18em;
+ color: #77736f;
+ margin-bottom: 12px;
+ }
+ .logo .en {
+ font-family: Georgia, serif;
+ font-size: 13px;
+ letter-spacing: .58em;
+ color: #8b8783;
+ }
+
+ .menu {
+ display: flex;
+ gap: 46px;
+ font-family: var(--serif);
+ font-size: 15px;
+ color: #6e6761;
+ }
+
+ .icons {
+ display: flex;
+ gap: 24px;
+ font-size: 24px;
+ color: #68615b;
+ }
+
+ .hero {
+ min-height: 650px;
+ padding: 72px 8vw 90px;
+ display: grid;
+ grid-template-columns: .9fr 1.1fr;
+ gap: 50px;
+ align-items: center;
+ position: relative;
+ overflow: hidden;
+ background:
+ radial-gradient(circle at 78% 18%, rgba(255,255,255,.82) 0 16%, transparent 38%),
+ linear-gradient(115deg, #f7eee7 0%, #fffaf5 48%, #ead7c8 100%);
+ }
+
+ .hero::before {
+ content: "";
+ position: absolute;
+ inset: 0;
+ background:
+ linear-gradient(116deg, transparent 0 46%, rgba(255,255,255,.54) 46.4% 47%, transparent 47.5%),
+ radial-gradient(ellipse at 42% 50%, rgba(255,255,255,.5), transparent 46%);
+ pointer-events: none;
+ }
+
+ .hero-copy, .hero-visual { position: relative; z-index: 1; }
+
+ .hero h1 {
+ margin: 0;
+ font-family: var(--serif);
+ font-weight: 400;
+ font-size: clamp(32px, 3vw, 48px);
+ letter-spacing: .12em;
+ color: #74675e;
+ }
+
+ .short-line {
+ width: 70px;
+ height: 2px;
+ background: #cfa394;
+ margin: 34px 0 32px;
+ }
+
+ .hero p {
+ max-width: 480px;
+ margin: 0 0 36px;
+ line-height: 2.1;
+ font-size: 16px;
+ color: #746f69;
+ }
+
+ .btn {
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ gap: 20px;
+ min-width: 170px;
+ padding: 16px 28px;
+ border-radius: 999px;
+ color: #fff;
+ background: linear-gradient(135deg, #dfb5a9, #cfa092);
+ box-shadow: 0 14px 30px rgba(190, 139, 122, .24);
+ font-family: var(--serif);
+ transition: .25s ease;
+ }
+ .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 36px rgba(190, 139, 122, .3); }
+
+ .plate {
+ width: min(610px, 100%);
+ aspect-ratio: 1.18;
+ margin-left: auto;
+ position: relative;
+ display: grid;
+ place-items: center;
+ }
+
+ .plate::before {
+ content: "";
+ width: 86%;
+ height: 35%;
+ position: absolute;
+ bottom: 10%;
+ background: radial-gradient(ellipse, rgba(90,70,55,.18), transparent 68%);
+ filter: blur(10px);
+ }
+
+ .dish {
+ width: 82%;
+ height: 42%;
+ position: absolute;
+ bottom: 12%;
+ border-radius: 50%;
+ background: linear-gradient(180deg, #fffefb, #e6ddd5);
+ box-shadow: inset 0 -15px 30px rgba(120,90,70,.1), 0 28px 60px rgba(94,72,55,.15);
+ }
+
+ .nougat-stack {
+ position: relative;
+ width: 400px;
+ height: 320px;
+ transform: translateY(-20px);
+ }
+
+ .cube {
+ position: absolute;
+ width: 142px;
+ height: 96px;
+ border-radius: 15px;
+ background: #f7efe2;
+ box-shadow: 0 18px 25px rgba(90,65,45,.16), inset 0 -10px 18px rgba(145,95,65,.08);
+ overflow: hidden;
+ }
+ .cube::before, .cube::after {
+ content: "";
+ position: absolute;
+ border-radius: 999px;
+ opacity: .85;
+ }
+ .cube::before { width: 34px; height: 18px; left: 22px; top: 20px; background: #c99f73; transform: rotate(-18deg); }
+ .cube::after { width: 25px; height: 20px; right: 28px; top: 34px; background: #e0b45e; transform: rotate(22deg); }
+ .cube span, .cube b, .cube i {
+ position: absolute; display: block; border-radius: 999px; opacity: .9;
+ }
+ .cube span { width: 30px; height: 18px; left: 70px; top: 58px; background: #b8865e; transform: rotate(12deg); }
+ .cube b { width: 24px; height: 18px; left: 92px; top: 18px; background: #f2d7b6; transform: rotate(-30deg); }
+ .cube i { width: 22px; height: 26px; right: 18px; bottom: 16px; background: #d95f63; transform: rotate(18deg); }
+
+ .strawberry { background: #f9e4e1; }
+ .strawberry::before, .strawberry::after, .strawberry i { background: #d95f63; }
+ .choco { background: #6f5141; }
+ .choco::before, .choco::after, .choco span, .choco b { background: #f3d9b9; }
+ .plain { background: #fff1dd; }
+ .plain i { background: #d9a95d; }
+
+ .c1 { left: 130px; top: 15px; z-index: 5; }
+ .c2 { left: 58px; top: 112px; z-index: 4; }
+ .c3 { left: 190px; top: 112px; z-index: 4; }
+ .c4 { left: 10px; top: 205px; z-index: 3; }
+ .c5 { left: 145px; top: 205px; z-index: 3; }
+ .c6 { left: 275px; top: 205px; z-index: 3; }
+
+ .brand-card {
+ position: absolute;
+ right: 4vw;
+ top: 110px;
+ width: 270px;
+ height: 230px;
+ border-radius: 3px;
+ background: linear-gradient(145deg, rgba(255,250,244,.78), rgba(224,198,176,.68));
+ display: grid;
+ place-items: center;
+ box-shadow: 0 22px 55px rgba(99,76,55,.1);
+ }
+
+ .section {
+ padding: 64px 6.5vw 48px;
+ }
+
+ .section-title { text-align: center; margin-bottom: 50px; }
+ .section-title h2 {
+ margin: 0 0 14px;
+ font-family: var(--serif);
+ font-size: 36px;
+ font-weight: 400;
+ color: #756b63;
+ letter-spacing: .16em;
+ }
+ .section-title .sub { color: #9d9188; font-family: var(--serif); }
+ .dot { color: #d7a99c; margin: 0 30px; }
+
+ .products {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 34px;
+ max-width: 1320px;
+ margin: 0 auto;
+ }
+
+ .card {
+ background: linear-gradient(180deg, #fffdf9, #fff8f1);
+ border-radius: var(--radius);
+ overflow: hidden;
+ box-shadow: var(--shadow);
+ border: 1px solid rgba(234, 223, 214, .75);
+ position: relative;
+ }
+
+ .badge {
+ width: 94px;
+ height: 94px;
+ border-radius: 50%;
+ background: #fff4ed;
+ border: 2px solid rgba(218,188,171,.7);
+ display: grid;
+ place-items: center;
+ font-size: 34px;
+ position: absolute;
+ top: -47px;
+ left: 50%;
+ transform: translateX(-50%);
+ z-index: 2;
+ box-shadow: 0 15px 30px rgba(130,90,65,.12);
+ }
+
+ .product-img {
+ height: 390px;
+ margin-top: 45px;
+ display: grid;
+ place-items: center;
+ position: relative;
+ overflow: hidden;
+ }
+ .product-img.straw { background: linear-gradient(135deg, #f8d7d4, #fff1ee); }
+ .product-img.choco-bg { background: linear-gradient(135deg, #b8917e, #6e5141); }
+ .product-img.plain-bg { background: linear-gradient(135deg, #f4e0c6, #fff7e8); }
+
+ .mini-stack {
+ width: 270px;
+ height: 230px;
+ position: relative;
+ transform: scale(.9);
+ }
+ .mini-stack .cube { transform: scale(.82); transform-origin: top left; }
+ .mini-stack .c1 { left: 94px; top: 0; }
+ .mini-stack .c2 { left: 20px; top: 74px; }
+ .mini-stack .c3 { left: 128px; top: 74px; }
+ .mini-stack .c4 { left: 62px; top: 145px; }
+
+ .card-body {
+ padding: 28px 32px 34px;
+ text-align: center;
+ }
+ .card-body h3 {
+ margin: 0 0 8px;
+ font-family: var(--serif);
+ font-size: 24px;
+ font-weight: 400;
+ color: #675d56;
+ }
+ .en-name {
+ font-family: Georgia, serif;
+ letter-spacing: .32em;
+ font-size: 13px;
+ color: #aa9c91;
+ margin-bottom: 22px;
+ }
+ .desc {
+ line-height: 1.9;
+ color: #8a8078;
+ font-size: 14px;
+ margin-bottom: 24px;
+ letter-spacing: .12em;
+ }
+
+ .features {
+ max-width: 1320px;
+ margin: 44px auto 0;
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ background: rgba(255,255,255,.68);
+ border: 1px solid rgba(234, 223, 214, .8);
+ border-radius: 22px;
+ box-shadow: 0 16px 50px rgba(110, 82, 60, .08);
+ overflow: hidden;
+ }
+ .feature {
+ min-height: 108px;
+ display: grid;
+ grid-template-columns: 62px 1fr;
+ align-items: center;
+ gap: 18px;
+ padding: 22px 30px;
+ border-right: 1px solid var(--line);
+ }
+ .feature:last-child { border-right: 0; }
+ .feature .ico { font-size: 38px; color: #c8a792; }
+ .feature strong {
+ display: block;
+ font-family: var(--serif);
+ font-weight: 400;
+ font-size: 17px;
+ color: #74675f;
+ margin-bottom: 7px;
+ }
+ .feature span { font-size: 12px; color: #a0968e; letter-spacing: .08em; }
+
+ .footer {
+ text-align: center;
+ padding: 42px 20px 52px;
+ color: #918981;
+ font-size: 13px;
+ }
+ .footer .logo { margin-bottom: 18px; }
+ .social { display: flex; justify-content: center; gap: 16px; margin: 18px 0; }
+ .social a {
+ width: 38px; height: 38px;
+ border-radius: 50%;
+ background: #f0e8df;
+ display: grid; place-items: center;
+ color: #847970;
+ }
+
+ @media (max-width: 980px) {
+ .nav { height: auto; padding: 24px 5vw; gap: 22px; align-items: flex-start; }
+ .menu { display: none; }
+ .hero { grid-template-columns: 1fr; padding: 60px 6vw; }
+ .hero-copy { text-align: center; }
+ .short-line { margin-left: auto; margin-right: auto; }
+ .hero p { margin-left: auto; margin-right: auto; }
+ .brand-card { display: none; }
+ .plate { margin: 0 auto; }
+ .products { grid-template-columns: 1fr; max-width: 520px; }
+ .features { grid-template-columns: 1fr 1fr; }
+ }
+
+ @media (max-width: 560px) {
+ body { letter-spacing: .04em; }
+ .logo .zh { font-size: 28px; }
+ .logo .en { font-size: 11px; }
+ .hero { min-height: auto; }
+ .nougat-stack { transform: scale(.78); transform-origin: center; }
+ .plate { height: 370px; }
+ .products { gap: 54px; }
+ .product-img { height: 320px; }
+ .features { grid-template-columns: 1fr; }
+ .feature { border-right: 0; border-bottom: 1px solid var(--line); }
+ .section-title h2 { font-size: 28px; }
+ }
+ </style>
 </head>
-
 <body>
+ <header class="nav">
+ <a class="logo" href="#">
+ <div class="zh">微 光</div>
+ <div class="en">MI GLOW</div>
+ </a>
 
-<!-- Navbar -->
-<header class="navbar">
- <div class="logo">微光</div>
-
- <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
- <nav id="menu">
- <a href="#">品牌</a>
- <a href="#">商品</a>
- <a href="#">禮盒</a>
- <a href="#">門市</a>
- <a href="#" onclick="openLogin()">登入</a>
+ <nav class="menu">
+ <a href="#">首頁</a>
+ <a href="#products">商品介紹</a>
+ <a href="#about">關於我們</a>
+ <a href="#notice">訂購須知</a>
+ <a href="#contact">聯絡我們</a>
  </nav>
-</header>
 
-<!-- Banner -->
-<section class="banner">
- <div class="overlay"></div>
- <div class="banner-text">
- <h1>MIGLOW</h1>
- <p>在日常中，留下一點微光</p>
+ <div class="icons" aria-label="會員與購物袋">
+ <span>♡</span>
+ <span>♧</span>
+ <span>🛍</span>
  </div>
-</section>
+ </header>
 
-<!-- 商品 -->
-<section class="section">
- <h2>雪花酥系列</h2>
+ <main>
+ <section class="hero">
+ <div class="hero-copy">
+ <h1>微光・甜在心裡的幸福</h1>
+ <div class="short-line"></div>
+ <p>
+ 手工製作的雪花酥，嚴選食材，層層堆疊出幸福的好滋味。<br>
+ 一口酥香、一點微光，把日常變成值得收藏的甜。
+ </p>
+ <a class="btn" href="#products">立即選購 <span>→</span></a>
+ </div>
 
- <div class="grid">
+ <div class="hero-visual">
+ <div class="brand-card">
+ <div class="logo">
+ <div class="zh">微 光</div>
+ <div class="en">MI GLOW</div>
+ </div>
+ </div>
+ <div class="plate">
+ <div class="dish"></div>
+ <div class="nougat-stack" aria-label="雪花酥產品圖">
+ <div class="cube strawberry c1"><span></span><b></b><i></i></div>
+ <div class="cube choco c2"><span></span><b></b><i></i></div>
+ <div class="cube plain c3"><span></span><b></b><i></i></div>
+ <div class="cube choco c4"><span></span><b></b><i></i></div>
+ <div class="cube strawberry c5"><span></span><b></b><i></i></div>
+ <div class="cube plain c6"><span></span><b></b><i></i></div>
+ </div>
+ </div>
+ </div>
+ </section>
 
- <div class="card">
- <img src="https://images.unsplash.com/photo-1612197594450-6a0c2c0b8c76">
+ <section class="section" id="products">
+ <div class="section-title">
+ <h2><span class="dot">•</span>雪花酥系列<span class="dot">•</span></h2>
+ <div class="sub">三種口味・三種幸福</div>
+ </div>
+
+ <div class="products">
+ <article class="card">
+ <div class="badge">🍓</div>
+ <div class="product-img straw">
+ <div class="mini-stack">
+ <div class="cube strawberry c1"><span></span><b></b><i></i></div>
+ <div class="cube strawberry c2"><span></span><b></b><i></i></div>
+ <div class="cube strawberry c3"><span></span><b></b><i></i></div>
+ <div class="cube strawberry c4"><span></span><b></b><i></i></div>
+ </div>
+ </div>
+ <div class="card-body">
  <h3>草莓</h3>
+ <div class="en-name">STRAWBERRY</div>
+ <div class="desc">酸甜草莓搭配奶香，清新不膩口。</div>
+ <a class="btn" href="#">立即選購 <span>→</span></a>
  </div>
+ </article>
 
- <div class="card">
- <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c">
+ <article class="card">
+ <div class="badge">▧</div>
+ <div class="product-img choco-bg">
+ <div class="mini-stack">
+ <div class="cube choco c1"><span></span><b></b><i></i></div>
+ <div class="cube choco c2"><span></span><b></b><i></i></div>
+ <div class="cube choco c3"><span></span><b></b><i></i></div>
+ <div class="cube choco c4"><span></span><b></b><i></i></div>
+ </div>
+ </div>
+ <div class="card-body">
  <h3>巧克力</h3>
+ <div class="en-name">CHOCOLATE</div>
+ <div class="desc">濃郁可可香氣，甜而不膩。</div>
+ <a class="btn" href="#">立即選購 <span>→</span></a>
  </div>
+ </article>
 
- <div class="card">
- <img src="https://images.unsplash.com/photo-1586985289906-406988974504">
+ <article class="card">
+ <div class="badge">🥛</div>
+ <div class="product-img plain-bg">
+ <div class="mini-stack">
+ <div class="cube plain c1"><span></span><b></b><i></i></div>
+ <div class="cube plain c2"><span></span><b></b><i></i></div>
+ <div class="cube plain c3"><span></span><b></b><i></i></div>
+ <div class="cube plain c4"><span></span><b></b><i></i></div>
+ </div>
+ </div>
+ <div class="card-body">
  <h3>原味</h3>
+ <div class="en-name">ORIGINAL</div>
+ <div class="desc">經典奶香，酥香濃郁，越嚼越香。</div>
+ <a class="btn" href="#">立即選購 <span>→</span></a>
+ </div>
+ </article>
  </div>
 
+ <div class="features" id="about">
+ <div class="feature">
+ <div class="ico">♡</div>
+ <div><strong>手工製作</strong><span>用心製作每一份甜點</span></div>
  </div>
-</section>
-
-<!-- Footer -->
-<footer>
- © MIGLOW
-</footer>
-
-<!-- Login Modal -->
-<div id="loginModal" class="modal">
- <div class="modal-content">
- <span onclick="closeLogin()" class="close">&times;</span>
- <h2>會員登入</h2>
- <input type="text" placeholder="帳號">
- <input type="password" placeholder="密碼">
- <button>登入</button>
+ <div class="feature">
+ <div class="ico">☘️</div>
+ <div><strong>嚴選食材</strong><span>安心食材・吃得放心</span></div>
  </div>
-</div>
+ <div class="feature">
+ <div class="ico">🎁</div>
+ <div><strong>精美包裝</strong><span>送禮自用兩相宜</span></div>
+ </div>
+ <div class="feature">
+ <div class="ico">🚚</div>
+ <div><strong>快速出貨</strong><span>新鮮美味・快速送達</span></div>
+ </div>
+ </div>
+ </section>
+ </main>
 
-<script src="js/main.js"></script>
+ <footer class="footer" id="contact">
+ <div class="logo">
+ <div class="zh">微 光</div>
+ <div class="en">MI GLOW</div>
+ </div>
+ <div class="social">
+ <a href="#">IG</a>
+ <a href="#">FB</a>
+ <a href="#">LINE</a>
+ </div>
+ © 2026 MI GLOW 微光甜點工作室 All Rights Reserved.
+ </footer>
 </body>
 </html>
