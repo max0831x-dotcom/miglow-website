@@ -1,8 +1,10 @@
-// 滾動淡入動畫
 const fades = document.querySelectorAll('.fade');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('show');
-  });
-}, { threshold: 0.2 });
-fades.forEach(el => observer.observe(el));
+
+window.addEventListener('scroll', () => {
+ fades.forEach(el => {
+ const top = el.getBoundingClientRect().top;
+ if(top < window.innerHeight - 100){
+ el.classList.add('show');
+ }
+ });
+});
