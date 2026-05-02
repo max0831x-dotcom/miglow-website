@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>微光 MI GLOW｜會員登入</title>
+  <style>
+    :root{
+      --bg:#fbf8f3;--cream:#fffaf4;--text:#756a62;--muted:#9d928a;--dark:#5e554d;
+      --line:#eadfd6;--pink:#d4a094;--beige:#ead7c7;--shadow:0 24px 80px rgba(100,74,55,.13);
+      --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+      --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--sans);color:var(--text);letter-spacing:.08em;background:linear-gradient(180deg,#fffdf9 0%,var(--bg) 58%,#fffaf4 100%)}
+    a{text-decoration:none;color:inherit}
+    .nav{height:118px;padding:0 6vw;display:flex;align-items:center;justify-content:space-between;background:rgba(255,252,248,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(234,223,214,.65);position:sticky;top:0;z-index:50}
+    .logo .zh{font-family:var(--serif);font-size:36px;letter-spacing:.2em;color:#74706b;line-height:1;margin-bottom:13px}.logo .en{font-family:Georgia,serif;font-size:13px;letter-spacing:.62em;color:#8d8882}.menu{display:flex;gap:46px;font-family:var(--serif);font-size:15px;color:#675f58}.icons{display:flex;gap:24px;font-size:24px;color:#6d665f}
+
+    .login-area{min-height:760px;display:grid;grid-template-columns:.95fr 1.05fr;background:linear-gradient(112deg,#f3e6dc 0%,#fffaf6 52%,#f5ece5 100%);position:relative;overflow:hidden}.login-area:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 30%,rgba(255,255,255,.72),transparent 36%),linear-gradient(116deg,transparent 0 46%,rgba(255,255,255,.48) 46.5% 47.2%,transparent 48%)}
+    .brand-side,.form-side{position:relative;z-index:1}.brand-side{padding:90px 6vw 60px;display:flex;align-items:center;justify-content:center;overflow:hidden}.brand-inner{text-align:center;width:min(520px,100%)}.brand-title{font-family:var(--serif);font-size:58px;letter-spacing:.22em;color:#6e625a;line-height:1;margin-bottom:22px}.brand-en{font-family:Georgia,serif;font-size:18px;letter-spacing:.55em;color:#7c7068;margin-bottom:26px}.ornament{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px}.ornament:before,.ornament:after{content:"";width:92px;height:1px;background:#cfa095}.ornament span{color:#c48e82}.slogan{font-family:var(--serif);font-size:22px;color:#c08f83;margin-bottom:82px}.scene{height:360px;position:relative;display:grid;place-items:center}.box{position:absolute;left:0;bottom:64px;width:185px;height:210px;background:linear-gradient(135deg,#d8bea7,#f3e4d7);box-shadow:0 24px 58px rgba(85,65,50,.14);display:grid;place-items:center}.box .logo .zh{font-size:28px}.box .logo .en{font-size:10px}.dish{position:absolute;width:430px;height:150px;bottom:0;border-radius:50%;background:linear-gradient(180deg,#fffefb,#e7ded6);box-shadow:inset 0 -15px 30px rgba(120,90,70,.1),0 24px 55px rgba(94,72,55,.15)}.flowers{position:absolute;left:-34px;bottom:0;color:#d7c2aa;font-size:54px;opacity:.58;transform:rotate(-18deg)}.cloth{position:absolute;right:10px;bottom:-35px;width:170px;height:90px;border-radius:60% 40% 0 0;background:#d3b2a8;opacity:.55;filter:blur(.4px)}
+
+    .nougat-stack{position:relative;width:360px;height:270px;z-index:2}.cube{position:absolute;width:132px;height:88px;border-radius:14px;background:#f9e0dd;box-shadow:0 18px 25px rgba(95,69,48,.14),inset 0 -10px 16px rgba(120,70,50,.08);overflow:hidden}.cube:before,.cube:after,.cube span,.cube b,.cube i{content:"";display:block;position:absolute;border-radius:999px}.cube:before{width:32px;height:18px;left:18px;top:18px;background:#d85863;transform:rotate(-20deg)}.cube:after{width:26px;height:20px;right:22px;top:26px;background:#e88c94;transform:rotate(18deg)}.cube span{width:28px;height:17px;left:68px;top:54px;background:#f4c8b0;transform:rotate(12deg)}.cube b{width:22px;height:18px;left:88px;top:16px;background:#df7d82;transform:rotate(-28deg)}.cube i{width:22px;height:20px;right:15px;bottom:12px;background:#c64c59;transform:rotate(25deg)}.choco{background:#735241}.choco:before,.choco:after,.choco span,.choco b,.choco i{background:#efd2b2}.plain{background:#fff0da}.plain:before,.plain:after,.plain span,.plain b,.plain i{background:#d7a960}.c1{left:116px;top:2px;z-index:5}.c2{left:40px;top:82px;z-index:4}.c3{left:162px;top:82px;z-index:4}.c4{left:86px;top:158px;z-index:3}.c5{left:208px;top:158px;z-index:3}
+
+    .form-side{display:flex;align-items:center;justify-content:center;padding:70px 6vw}.login-card{width:min(610px,100%);padding:70px 52px 58px;border-radius:28px;background:rgba(255,255,255,.78);border:1px solid rgba(234,223,214,.82);box-shadow:var(--shadow);backdrop-filter:blur(18px)}.avatar{width:118px;height:118px;margin:0 auto 30px;border-radius:50%;background:linear-gradient(145deg,#f5eee9,#eee2d9);display:grid;place-items:center;color:#b98b7f;font-size:68px}.login-card h1{text-align:center;margin:0 0 42px;font-family:var(--serif);font-size:34px;font-weight:400;color:#635951;letter-spacing:.18em}.field{margin-bottom:24px}.field label{display:block;margin-bottom:12px;font-family:var(--serif);color:#655b53}.input-wrap{position:relative}.input-wrap .ico{position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:24px;color:#b98b7f}.input-wrap .eye{position:absolute;right:20px;top:50%;transform:translateY(-50%);color:#b98b7f;font-size:20px}input{width:100%;height:62px;border:1px solid #decac0;background:rgba(255,255,255,.6);border-radius:14px;padding:0 58px;font-family:var(--serif);font-size:15px;color:#766a62;letter-spacing:.08em;outline:none}.forgot{text-align:right;margin:-8px 0 28px}.forgot a{font-family:var(--serif);color:#bd8e83;font-size:14px;border-bottom:1px solid #d9b2a7}.login-btn{width:100%;height:58px;border:0;border-radius:999px;background:linear-gradient(135deg,#d8a196,#c2877c);color:#fff;font-family:var(--serif);font-size:20px;letter-spacing:.2em;box-shadow:0 15px 30px rgba(190,139,122,.22);cursor:pointer}.divider{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin:42px 0 28px;color:#958a82;font-family:var(--serif);font-size:15px}.divider:before,.divider:after{content:"";height:1px;background:#e5d7ce}.social-login{display:flex;justify-content:center;gap:38px;margin-bottom:42px}.social-login a{width:70px;height:70px;border-radius:50%;border:1px solid #e1d1c8;background:rgba(255,255,255,.68);display:grid;place-items:center;font-size:30px;box-shadow:0 12px 28px rgba(100,74,55,.08)}.facebook{color:#3867b4}.google{color:#db4437}.line{color:#06c755;font-size:18px!important;font-weight:bold}.register{text-align:center;font-family:var(--serif);color:#746a62}.register a{color:#bd8e83;margin-left:14px}
+
+    .service-bar{max-width:1320px;margin:26px auto 0;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.72);border:1px solid rgba(234,223,215,.88);border-radius:24px;box-shadow:0 16px 50px rgba(110,82,60,.08);overflow:hidden}.service{min-height:112px;display:grid;grid-template-columns:60px 1fr;gap:18px;align-items:center;padding:22px 30px;border-right:1px solid var(--line)}.service:last-child{border-right:0}.service .ico{font-size:38px;color:#c39a8d}.service strong{display:block;font-family:var(--serif);font-weight:400;color:#70655d;margin-bottom:6px}.service span{font-size:12px;color:#a2978f}
+    footer{padding:48px 20px 58px;text-align:center;color:#8e857e;position:relative;overflow:hidden}footer:after{content:"✤ ✤ ✤";position:absolute;right:8vw;bottom:38px;color:#d8c5ae;font-size:50px;opacity:.55;transform:rotate(-22deg)}.social{display:flex;justify-content:center;gap:16px;margin:18px 0 24px}.social a{width:38px;height:38px;border-radius:50%;background:#eee6dd;display:grid;place-items:center;font-size:12px}.footer-menu{display:flex;justify-content:center;gap:36px;font-family:var(--serif);font-size:14px;margin-bottom:24px}
+
+    @media(max-width:1000px){.menu{display:none}.login-area{grid-template-columns:1fr}.brand-side{padding:60px 6vw 30px}.form-side{padding:40px 6vw}.service-bar{grid-template-columns:1fr 1fr;margin:24px 6vw 0}}
+    @media(max-width:560px){body{letter-spacing:.04em}.nav{height:auto;padding:22px 5vw}.logo .zh{font-size:28px}.logo .en{font-size:11px}.brand-title{font-size:42px}.brand-en{font-size:14px}.slogan{font-size:18px;margin-bottom:45px}.scene{transform:scale(.78);height:300px}.login-card{padding:44px 24px}.form-side{padding:26px 5vw}.social-login{gap:18px}.service-bar{grid-template-columns:1fr}.service{border-right:0;border-bottom:1px solid var(--line)}.footer-menu{flex-wrap:wrap;gap:18px}}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="index.html"><div class="zh">微 光</div><div class="en">MI GLOW</div></a>
+    <nav class="menu"><a href="index.html">首頁</a><a href="product.html">商品介紹</a><a href="about.html">關於我們</a><a href="order.html">訂購須知</a><a href="contact.html">聯絡我們</a></nav>
+    <div class="icons"><span>♡</span><span>♙</span><span>🛍</span></div>
+  </header>
+
+  <main class="login-area">
+    <section class="brand-side">
+      <div class="brand-inner">
+        <div class="brand-title">微 光</div>
+        <div class="brand-en">MI GLOW</div>
+        <div class="ornament"><span>✦</span></div>
+        <div class="slogan">甜在心裡的幸福，從微光開始</div>
+        <div class="scene">
+          <div class="box"><div class="logo"><div class="zh">微 光</div><div class="en">MI GLOW</div></div></div>
+          <div class="dish"></div>
+          <div class="nougat-stack">
+            <div class="cube plain c1"><span></span><b></b><i></i></div>
+            <div class="cube choco c2"><span></span><b></b><i></i></div>
+            <div class="cube plain c3"><span></span><b></b><i></i></div>
+            <div class="cube c4"><span></span><b></b><i></i></div>
+            <div class="cube plain c5"><span></span><b></b><i></i></div>
+          </div>
+          <div class="flowers">✤ ✤ ✤</div>
+          <div class="cloth"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-side">
+      <div class="login-card">
+        <div class="avatar">♙</div>
+        <h1>會員登入</h1>
+        <form>
+          <div class="field">
+            <label for="email">電子郵件</label>
+            <div class="input-wrap"><span class="ico">✉</span><input id="email" type="email" placeholder="請輸入電子郵件" required></div>
+          </div>
+          <div class="field">
+            <label for="password">密碼</label>
+            <div class="input-wrap"><span class="ico">▣</span><input id="password" type="password" placeholder="請輸入密碼" required><span class="eye">◉</span></div>
+          </div>
+          <div class="forgot"><a href="#">忘記密碼？</a></div>
+          <button class="login-btn" type="submit">登入</button>
+          <div class="divider">或使用以下方式登入</div>
+          <div class="social-login">
+            <a class="facebook" href="#">f</a>
+            <a class="google" href="#">G</a>
+            <a class="line" href="#">LINE</a>
+          </div>
+          <div class="register">還沒有帳號？<a href="#">立即註冊</a></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <section class="service-bar">
+    <div class="service"><div class="ico">☘</div><div><strong>嚴選食材</strong><span>安心食材・吃得放心</span></div></div>
+    <div class="service"><div class="ico">♡</div><div><strong>手工製作</strong><span>用心製作每一份甜點</span></div></div>
+    <div class="service"><div class="ico">🎁</div><div><strong>精美包裝</strong><span>送禮自用兩相宜</span></div></div>
+    <div class="service"><div class="ico">🚚</div><div><strong>快速出貨</strong><span>新鮮美味・快速送達</span></div></div>
+  </section>
+
+  <footer>
+    <div class="logo"><div class="zh">微 光</div><div class="en">MI GLOW</div></div>
+    <div class="social"><a href="#">IG</a><a href="#">FB</a><a href="#">LINE</a></div>
+    <div class="footer-menu"><a href="index.html">首頁</a><a href="product.html">商品介紹</a><a href="about.html">關於我們</a><a href="order.html">訂購須知</a><a href="contact.html">聯絡我們</a></div>
+    <div>© 2026 MI GLOW 微光甜點工作室 All Rights Reserved.</div>
+  </footer>
+</body>
+</html>
