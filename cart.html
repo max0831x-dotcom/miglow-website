@@ -30,6 +30,21 @@
     @media(max-width:1050px){.menu{display:none}.hero{grid-template-columns:1fr;text-align:center}.cart-layout{grid-template-columns:1fr}.summary{position:static}.cart-item{grid-template-columns:32px 120px 1fr;gap:18px}.qty,.trash{grid-column:auto}.rec-row{grid-template-columns:repeat(2,1fr)}.round-btn{display:none}.service-bar{grid-template-columns:1fr 1fr}.brand-box{display:none}}
     @media(max-width:560px){body{letter-spacing:.04em}.nav{height:auto;padding:22px 5vw}.logo .zh{font-size:28px}.logo .en{font-size:11px}.hero{padding:42px 6vw}.hero-scene{transform:scale(.82);height:240px}.wrap{padding:0 5vw}.cart-box,.summary,.recommend{padding:26px 20px}.cart-item{grid-template-columns:1fr;text-align:center}.check{margin:auto}.product-img{margin:auto}.qty{width:150px;margin:auto}.free-ship{grid-template-columns:1fr;text-align:center}.ship-icon{margin:auto}.bar-row{display:block}.bar{margin-bottom:10px}.rec-row{grid-template-columns:1fr}.service-bar{grid-template-columns:1fr}.service{border-right:0;border-bottom:1px solid var(--line)}.footer-menu{flex-wrap:wrap;gap:18px}}
   </style>
+  .cart-box { position: relative; overflow: hidden; }
+  .recommend { position: relative; overflow: hidden; }
+  .panel { position: relative; overflow: hidden; }
+  .section-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 0;
+    pointer-events: none;
+  }
+
 </head>
 <body>
   <header class="nav">
@@ -60,8 +75,37 @@
   }
 })();
 </script>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
 
   <section class="hero">
+<div class="section-bg" style="background-image:url('assets/cart_hero_banner.jpg')"></div>
     <div class="hero-copy"><h1>購物車</h1><div class="breadcrumb">首頁　&gt;　購物車</div></div>
     <div class="hero-visual"><div class="hero-scene"><div class="brand-box"><div class="logo"><div class="zh">微 光</div><div class="en">MI GLOW</div></div></div><div class="dish"></div><div class="nougat-stack"><div class="cube c1"><span></span><b></b><i></i></div><div class="cube choco c2"><span></span><b></b><i></i></div><div class="cube plain c3"><span></span><b></b><i></i></div><div class="cube c4"><span></span><b></b><i></i></div></div><div class="flowers">✤ ✤ ✤</div></div></div>
   </section>
@@ -69,6 +113,7 @@
   <main class="wrap">
     <section class="cart-layout">
       <div class="panel cart-box">
+<div class="section-bg" style="background-image:url('assets/cart_cart_items.jpg')"></div>
         <div class="cart-head"><label><span class="check empty"></span>全選</label><a class="clear" href="#">♲　清空購物車</a></div>
 
         <article class="cart-item">
@@ -99,6 +144,7 @@
       </div>
 
       <aside class="panel summary">
+<div class="section-bg" style="background-image:url('assets/cart_order_summary.jpg')"></div>
         <h2>訂單摘要</h2><div class="title-line"></div>
         <div class="sum-row"><span>商品小計</span><strong>NT$ 1,240</strong></div>
         <div class="sum-row"><span>運費</span><strong>NT$ 100</strong></div>
@@ -112,6 +158,7 @@
     </section>
 
     <section class="panel recommend">
+<div class="section-bg" style="background-image:url('assets/cart_recommend_products.jpg')"></div>
       <h2 class="section-title">你可能也喜歡</h2>
       <div class="rec-row">
         <button class="round-btn">‹</button>

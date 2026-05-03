@@ -30,6 +30,19 @@
     @media(max-width:1000px){.menu{display:none}.login-area{grid-template-columns:1fr}.brand-side{padding:60px 6vw 30px}.form-side{padding:40px 6vw}.service-bar{grid-template-columns:1fr 1fr;margin:24px 6vw 0}}
     @media(max-width:560px){body{letter-spacing:.04em}.nav{height:auto;padding:22px 5vw}.logo .zh{font-size:28px}.logo .en{font-size:11px}.brand-title{font-size:42px}.brand-en{font-size:14px}.slogan{font-size:18px;margin-bottom:45px}.scene{transform:scale(.78);height:300px}.login-card{padding:44px 24px}.form-side{padding:26px 5vw}.social-login{gap:18px}.service-bar{grid-template-columns:1fr}.service{border-right:0;border-bottom:1px solid var(--line)}.footer-menu{flex-wrap:wrap;gap:18px}}
   </style>
+  .brand-side { position: relative; overflow: hidden; }
+  .section-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 0;
+    pointer-events: none;
+  }
+
 </head>
 <body>
 <header class="nav">
@@ -88,9 +101,38 @@
   }
 })();
 </script>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
 
   <main class="login-area">
     <section class="brand-side">
+<div class="section-bg" style="background-image:url('assets/login_brand_photo_left.jpg')"></div>
       <div class="brand-inner">
         <div class="brand-title">微 光</div>
         <div class="brand-en">MI GLOW</div>
@@ -114,6 +156,7 @@
 
     <section class="form-side">
       <div class="login-card">
+<div class="section-bg" style="background-image:url('assets/login_login_card.jpg')"></div>
         <div class="avatar">♙</div>
         <h1>會員登入</h1>
         <form>
