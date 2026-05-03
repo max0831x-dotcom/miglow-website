@@ -408,6 +408,21 @@
  .section-title h2 { font-size: 28px; }
  }
  </style>
+  .hero { position: relative; overflow: hidden; }
+  .section-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.6;
+  }
+
   .section-bg {
     position: absolute;
     inset: 0;
@@ -506,9 +521,38 @@
   }
 })();
 </script>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
 
  <main>
  <section class="hero">
+<div class="section-bg" style="background-image:url('assets/home_hero_banner.jpg')"></div>
 <div class="section-bg" style="background-image:url('assets/home_hero_banner.jpg')"></div>
  <div class="hero-copy">
  <h1>微光・甜在心裡的幸福</h1>
@@ -542,6 +586,7 @@
  </section>
 
  <section class="section" id="products">
+<div class="section-bg" style="background-image:url('assets/home_product_strawberry.jpg')"></div>
 <div class="section-bg" style="background-image:url('assets/home_product_strawberry.jpg')"></div>
  <div class="section-title">
  <h2><span class="dot">•</span>雪花酥系列<span class="dot">•</span></h2>

@@ -368,6 +368,23 @@
       .footer-menu{flex-wrap:wrap;gap:18px}
     }
   </style>
+  .hero { position: relative; overflow: hidden; }
+  .notice-card { position: relative; overflow: hidden; }
+  .bulk-box { position: relative; overflow: hidden; }
+  .section-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.6;
+  }
+
   .notice-card { position: relative; overflow: hidden; }
   .bulk-box { position: relative; overflow: hidden; }
   .section-bg {
@@ -468,8 +485,37 @@
   }
 })();
 </script>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
 
   <section class="hero">
+<div class="section-bg" style="background-image:url('assets/order_notice_hero_banner.jpg')"></div>
 <div class="section-bg" style="background-image:url('assets/order_notice_hero_banner.jpg')"></div>
     <div class="hero-copy">
       <h1>訂購須知</h1>
@@ -499,6 +545,7 @@
   <main class="wrap">
     <section class="notice-grid">
       <article class="notice-card">
+<div class="section-bg" style="background-image:url('assets/order_notice_notice_cards.jpg')"></div>
 <div class="section-bg" style="background-image:url('assets/order_notice_notice_cards.jpg')"></div>
         <div class="icon-circle">🛒</div>
         <div>
@@ -597,6 +644,7 @@
     </section>
 
     <section class="bulk-box">
+<div class="section-bg" style="background-image:url('assets/order_notice_bulk_order.jpg')"></div>
 <div class="section-bg" style="background-image:url('assets/order_notice_bulk_order.jpg')"></div>
       <div class="gift-icon">🎁</div>
       <div>

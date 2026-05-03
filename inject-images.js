@@ -67,6 +67,7 @@ for (const [file, rules] of Object.entries(byFile)) {
 
   // 需要加 position relative 的 class 列表（那些沒有本身沒有 relative 的）
   const relClasses = [
+    'hero',
     'page-hero', 'gallery-main', 'other-card',
     'photo-card', 'step-img',
     'notice-card', 'bulk-box',
@@ -94,6 +95,8 @@ for (const [file, rules] of Object.entries(byFile)) {
     background-repeat: no-repeat;
     z-index: 0;
     pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.6;
   }`;
 
   // 2. 插入背景 div（在每個 tag 後面）
