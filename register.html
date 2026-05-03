@@ -62,8 +62,36 @@
   <a href="order.html">訂購須知</a>
   <a href="contact.html">聯絡我們</a>
  </nav>
- <div class="icons"><a href="login.html"><span>👤</span></a><a href="#"><span>🛒</span></a></div>
+ <div class="icons"><a href="login.html"><span>👤</span></a><a href="cart.html"><span>🛒</span></a></div>
 </header>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
 <script>
 (function(){
   var menu = document.getElementById('main-menu');

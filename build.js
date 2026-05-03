@@ -14,6 +14,7 @@ const PAGES = [
   { file: 'login.html',     footerId: null },
   { file: 'register.html',  footerId: null },
   { file: 'forgot.html',    footerId: null },
+  { file: 'cart.html',      footerId: null },
 ];
 
 for (const page of PAGES) {
