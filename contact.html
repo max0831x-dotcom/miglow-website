@@ -55,12 +55,10 @@
 
     @media(max-width:1000px){.menu{display:none}.hero,.contact-panel,.map-panel{grid-template-columns:1fr}.hero{text-align:center}.short-line{margin:0 auto 28px}.brand-box{display:none}.info{border-right:0;border-bottom:1px dashed #d8c7bd}.faq,.service-bar{grid-template-columns:1fr 1fr}}
     @media(max-width:560px){body{letter-spacing:.04em}.nav{height:auto;padding:22px 5vw}.logo .zh{font-size:28px}.logo .en{font-size:11px}.hero{padding:48px 6vw}.hero-scene{transform:scale(.82);min-height:260px}.wrap{padding:34px 5vw 0}.info,.form-area{padding:30px 24px}.contact-item{grid-template-columns:1fr;text-align:center}.contact-icon{margin:auto}.form-grid,.faq,.service-bar{grid-template-columns:1fr}.service{border-right:0;border-bottom:1px solid var(--line)}.footer-menu{flex-wrap:wrap;gap:18px}}
-  </style>
+  
   .hero { position: relative; overflow: hidden; }
   .faq { position: relative; overflow: hidden; }
-  .contact-panel { position: relative; overflow: hidden; }
-  .map-panel { position: relative; overflow: hidden; }
-  .panel { position: relative; overflow: hidden; }
+
   .section-bg {
     position: absolute;
     inset: 0;
@@ -72,24 +70,19 @@
     z-index: 0;
     pointer-events: none;
     mix-blend-mode: multiply;
-    opacity: 0.6;
+    opacity: 0.5;
   }
+</style>
+  .hero { position: relative; overflow: hidden; }
+  .faq { position: relative; overflow: hidden; }
+  .contact-panel { position: relative; overflow: hidden; }
+  .map-panel { position: relative; overflow: hidden; }
+  .panel { position: relative; overflow: hidden; }
 
   .faq { position: relative; overflow: hidden; }
   .contact-panel { position: relative; overflow: hidden; }
   .map-panel { position: relative; overflow: hidden; }
   .panel { position: relative; overflow: hidden; }
-  .section-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    z-index: 0;
-    pointer-events: none;
-  }
 
 </head>
 <body>
@@ -205,10 +198,23 @@
   }
 })();
 </script>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
 
   <section class="hero">
-<div class="section-bg" style="background-image:url('assets/contact_hero_banner.jpg')"></div>
-<div class="section-bg" style="background-image:url('assets/contact_hero_banner.jpg')"></div>
+    <div class="section-bg" style="background-image:url('assets/contact_hero_banner.jpg')"></div>
     <div class="hero-copy">
       <h1>聯絡我們</h1><div class="short-line"></div>
       <h2>有任何問題，歡迎與我們聯繫</h2>
@@ -219,8 +225,7 @@
 
   <main class="wrap">
     <section class="panel contact-panel">
-<div class="section-bg" style="background-image:url('assets/contact_contact_info_form.jpg')"></div>
-<div class="section-bg" style="background-image:url('assets/contact_contact_info_form.jpg')"></div>
+    <div class="section-bg" style="background-image:url('assets/contact_contact_info_form.jpg')"></div>
       <div class="info">
         <h2 class="block-title">聯絡資訊</h2><div class="title-line"></div>
         <div class="contact-item"><div class="contact-icon">☎</div><div><h3>電話</h3><p>（02）1234-5678<br>週一至週五 10:00 - 18:00</p></div></div>
@@ -245,8 +250,7 @@
     </section>
 
     <section class="panel map-panel">
-<div class="section-bg" style="background-image:url('assets/contact_map_visit.jpg')"></div>
-<div class="section-bg" style="background-image:url('assets/contact_map_visit.jpg')"></div>
+    <div class="section-bg" style="background-image:url('assets/contact_map_visit.jpg')"></div>
       <div class="map"><div class="pin"></div><div class="map-label">微光 MI GLOW</div></div>
       <div class="visit"><h2>來店取貨／參觀</h2><p>歡迎提前預約來店取貨或參觀，感受微光手作甜點的美好。</p><a class="pill" href="#">預約來店 →</a></div>
       <div class="store-img"><div class="storefront"></div></div>
@@ -254,8 +258,7 @@
 
     <h2 class="faq-title"><span class="dot">•</span>常見問題<span class="dot">•</span></h2>
     <section class="faq">
-<div class="section-bg" style="background-image:url('assets/contact_faq.jpg')"></div>
-<div class="section-bg" style="background-image:url('assets/contact_faq.jpg')"></div>
+    <div class="section-bg" style="background-image:url('assets/contact_faq.jpg')"></div>
       <div class="faq-item"><div><strong>Q：多久可以收到訂單？</strong><span>現貨商品下單後約 2-3 個工作天出貨，預購商品請依商品頁說明。</span></div><div class="chev">⌄</div></div>
       <div class="faq-item"><div><strong>Q：商品有問題怎麼辦？</strong><span>如收到商品有瑕疵或運送過程中損壞，請 24 小時內與我們聯繫。</span></div><div class="chev">⌄</div></div>
       <div class="faq-item"><div><strong>Q：可以指定配送日期嗎？</strong><span>可以！請於結帳備註欄填寫希望配送日期。</span></div><div class="chev">⌄</div></div>
