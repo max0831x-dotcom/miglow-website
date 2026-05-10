@@ -55,8 +55,9 @@ for (const page of PAGES) {
   }
 
   const newBody = beforeHeader + HEADER_HTML + middle + finalFooter + afterFooter;
+  const chatCSS = '<link rel="stylesheet" href="assets/chat.css">\n';
   const chatScript = '<script src="assets/chat.js"></script>\n';
-  const result = html.slice(0, bodyOpen) + newBody + html.slice(bodyClose).replace('</body>', chatScript + '</body>');
+  const result = html.slice(0, bodyOpen) + newBody + html.slice(bodyClose).replace('</body>', chatCSS + chatScript + '</body>');
 
   fs.writeFileSync(filePath, result, 'utf8');
   console.log(`✅ ${page.file} updated`);
