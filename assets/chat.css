@@ -30,7 +30,8 @@
   position: fixed;
   bottom: 84px;
   right: 20px;
-  width: 320px;
+  width: 50%;
+  max-width: 500px;
   height: 440px;
   max-height: calc(100vh - 120px);
   background: #fff;
@@ -43,6 +44,22 @@
   font-family: "Noto Sans TC", "PingFang TC", sans-serif;
 }
 #mc-window.open { display: flex; }
+
+/* 平板：70%，最寬 500px */
+@media (min-width: 481px) and (max-width: 1024px) {
+  #mc-window { width: 70%; max-width: 500px; }
+}
+
+/* 手機：90%，全高 */
+@media (max-width: 480px) {
+  #mc-window {
+    right: 5%; bottom: 0;
+    width: 90%; max-width: none;
+    height: 100vh; max-height: 100vh;
+    border-radius: 0;
+  }
+  #mc-btn { bottom: 16px; right: 16px; width: 48px; height: 48px; font-size: 20px; }
+}
 
 /* 標題列 */
 #mc-header {
