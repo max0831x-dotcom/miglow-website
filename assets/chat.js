@@ -38,7 +38,7 @@
           <div class="name">小離 ✿ 微光助手</div>
           <div class="status">🟢 在線中</div>
         </div>
-        <button class="close" onclick="document.getElementById('mc-window').classList.remove('open')">✕</button>
+        <button class="close" id="mc-close-btn">✕</button>
       </div>
       <div id="mc-body">
         <div class="mc-msg bot">嗨～我是小離！有什麼關於微光雪花酥的問題都可以問我喔 🍪</div>
@@ -46,13 +46,13 @@
       <div id="mc-preview">
         <img id="mc-preview-img" src="" alt="preview">
         <span class="name" id="mc-preview-name"></span>
-        <button class="remove" onclick="window.__mcRemoveFile()">✕</button>
+        <button class="remove" id="mc-preview-remove">✕</button>
       </div>
       <div id="mc-input-area">
-        <button id="mc-upload-btn" onclick="document.getElementById('mc-file-input').click()">📎</button>
+        <button id="mc-upload-btn">📎</button>
         <textarea id="mc-input" rows="1" placeholder="輸入訊息…"></textarea>
-        <button id="mc-send-btn" onclick="window.__mcSend()">➤</button>
-        <input type="file" id="mc-file-input" accept="image/jpeg,image/png,image/gif,image/webp" style="display:none" onchange="window.__mcHandleFile(this)">
+        <button id="mc-send-btn">➤</button>
+        <input type="file" id="mc-file-input" accept="image/jpeg,image/png,image/gif,image/webp" style="display:none">
       </div>`;
 
     document.body.appendChild(btn);
@@ -65,7 +65,16 @@
     preview = document.getElementById('mc-preview');
     previewImg = document.getElementById('mc-preview-img');
     previewName = document.getElementById('mc-preview-name');
-    previewRemove = preview.querySelector('.remove');
+    previewRemove = document.getElementById('mc-preview-remove');
+    var closeBtn = document.getElementById('mc-close-btn');
+    var fileInput = document.getElementById('mc-file-input');
+
+    // 事件綁定
+    closeBtn.addEventListener('click', function() { win.classList.remove('open'); });
+    uploadBtn.addEventListener('click', function() { fileInput.click(); });
+    sendBtn.addEventListener('click', function() { window.__mcSend(); });
+    fileInput.addEventListener('change', function() { window.__mcHandleFile(this); });
+    previewRemove.addEventListener('click', function() { window.__mcRemoveFile(); });
 
     // Enter 送出
     input.addEventListener('keydown', function(e) {
