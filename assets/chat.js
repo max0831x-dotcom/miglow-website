@@ -166,23 +166,35 @@
       var query = text || (uploaded ? '(圖片)' : '');
 
       if (uploaded) {
-        // 有圖片 → 用 FormData
-        var formData = new FormData();
-        formData.append('inputs', '{}');
-        formData.append('query', query);
-        formData.append('response_mode', 'blocking');
-        formData.append('conversation_id', '');
-        formData.append('user', 'miglow-web');
-        formData.append('files', uploaded, uploadedName);
-
-        fetch(DIFY_API_URL, {
-          method: 'POST',
-          headers: { 'Authorization': 'Bearer ' + DIFY_API_KEY },
-          body: formData
-        })
-        .then(function(r) { return r.json(); })
-        .then(handleReply)
-        .catch(handleError);
+        // 有圖片 → 轉 base64 用 JSON 傳
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var base64 = e.target.result; // data:image/jpeg;base64,...
+          var body = {
+            inputs: {},
+            query: query,
+            response_mode: 'blocking',
+            conversation_id: '',
+            user: 'miglow-web',
+            files: [{
+              type: 'image',
+              transfer_method: 'base64',
+              base64: base64
+            }]
+          };
+          fetch(DIFY_API_URL, {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer ' + DIFY_API_KEY,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+          })
+          .then(function(r) { return r.json(); })
+          .then(handleReply)
+          .catch(handleError);
+        };
+        reader.readAsDataURL(uploaded);
       } else {
         // 純文字 → 用 JSON
         fetch(DIFY_API_URL, {
