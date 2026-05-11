@@ -168,8 +168,8 @@
       if (uploaded) {
         // 有圖片 → 轉 base64 用 JSON 傳
         var reader = new FileReader();
-        reader.onload = function(e) {
-          var base64 = e.target.result; // data:image/jpeg;base64,...
+        reader.onloadend = function(e) {
+          var base64 = e.target.result;
           var body = {
             inputs: {},
             query: query,
@@ -190,9 +190,22 @@
             },
             body: JSON.stringify(body)
           })
-          .then(function(r) { return r.json(); })
-          .then(handleReply)
-          .catch(handleError);
+          .then(function(r) {
+            return r.json();
+          })
+          .then(function(data) {
+            document.querySelector('.mc-dots')?.closest('.mc-msg')?.remove();
+            var reply = data && data.answer;
+            if (!reply) reply = '⋯抱歉，小離沒有回應。';
+            appendBotMsg(reply);
+            sendBtn.disabled = false;
+          })
+          .catch(function(err) {
+            document.querySelector('.mc-dots')?.closest('.mc-msg')?.remove();
+            appendBotMsg('⋯連線失敗，請稍後再試。');
+            console.error('Dify error:', err);
+            sendBtn.disabled = false;
+          });
         };
         reader.readAsDataURL(uploaded);
       } else {
@@ -211,9 +224,22 @@
             user: 'miglow-web'
           })
         })
-        .then(function(r) { return r.json(); })
-        .then(handleReply)
-        .catch(handleError);
+        .then(function(r) {
+          return r.json();
+        })
+        .then(function(data) {
+          document.querySelector('.mc-dots')?.closest('.mc-msg')?.remove();
+          var reply = data && data.answer;
+          if (!reply) reply = '⋯抱歉，小離沒有回應。';
+          appendBotMsg(reply);
+          sendBtn.disabled = false;
+        })
+        .catch(function(err) {
+          document.querySelector('.mc-dots')?.closest('.mc-msg')?.remove();
+          appendBotMsg('⋯連線失敗，請稍後再試。');
+          console.error('Dify error:', err);
+          sendBtn.disabled = false;
+        });
       }
     } else {
       // 無 API 設定：模擬已離線
@@ -226,20 +252,6 @@
     sendBtn.disabled = false;
   };
 
-  function handleReply(data) {
-    var loading = document.querySelector('.mc-dots');
-    if (loading) loading.closest('.mc-msg').remove();
-    var reply = data && data.answer;
-    if (!reply) reply = '⋯抱歉，小離沒有回應。';
-    appendBotMsg(reply);
-  }
-
-  function handleError(err) {
-    var loading = document.querySelector('.mc-dots');
-    if (loading) loading.closest('.mc-msg').remove();
-    appendBotMsg('⋯連線失敗，請稍後再試。');
-    console.error('Dify error:', err);
-  }
 
   function appendBotMsg(text) {
     var div = document.createElement('div');
