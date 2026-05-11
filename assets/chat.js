@@ -4,8 +4,8 @@
   'use strict';
 
   // ---- Dify 設定（待填入） ----
-  const DIFY_API_URL = '';        // 例: https://api.dify.ai/v1/chat-messages
-  const DIFY_API_KEY = '';        // 應用憑證
+  const DIFY_API_URL = 'https://api.dify.ai/v1/chat-messages';
+  const DIFY_API_KEY = 'app-oF34krJd4KZVXzDhnMkOfAjw';
 
   // ---- DOM 元素 ----
   let btn, win, body, input, sendBtn, uploadBtn, preview, previewImg, previewName, previewRemove;
