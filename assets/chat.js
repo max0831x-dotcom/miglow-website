@@ -163,51 +163,46 @@
 
     // 若有 Dify API 設定則呼叫
     if (DIFY_API_URL && DIFY_API_KEY) {
-      // 收集對話歷史
-      var msgs = [];
-      body.querySelectorAll('.mc-msg.bot, .mc-msg.user').forEach(function(el) {
-        if (el === loading) return;
-        var role = el.classList.contains('bot') ? 'assistant' : 'user';
-        var content = '';
-        var textNode = el.childNodes[0];
-        if (textNode) content = textNode.textContent || '';
-        var imgNode = el.querySelector('img');
-        if (imgNode && imgNode.src && imgNode.src.startsWith('data:')) {
-          content = '[圖片] ' + content;
-        }
-        if (!content.trim() && !imgNode) return;
-        msgs.push({ role: role, content: content.trim() || (role==='user'?'(圖片)':'(回覆)') });
-      });
-
-      var formData = new FormData();
-      formData.append('inputs', '{}');
-      formData.append('query', text || (uploaded ? '(圖片)' : ''));
-      formData.append('response_mode', 'blocking');
-      formData.append('conversation_id', '');
-      formData.append('user', 'miglow-web');
+      var query = text || (uploaded ? '(圖片)' : '');
 
       if (uploaded) {
+        // 有圖片 → 用 FormData
+        var formData = new FormData();
+        formData.append('inputs', '{}');
+        formData.append('query', query);
+        formData.append('response_mode', 'blocking');
+        formData.append('conversation_id', '');
+        formData.append('user', 'miglow-web');
         formData.append('files', uploaded, uploadedName);
-      }
 
-      fetch(DIFY_API_URL, {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + DIFY_API_KEY
-        },
-        body: formData
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        loading.remove();
-        var reply = data.answer || '⋯抱歉，小離沒有回應。';
-        appendBotMsg(reply);
-      })
-      .catch(function(err) {
-        loading.remove();
-        appendBotMsg('⋯連線失敗，請稍後再試。');
-        console.error('Dify error:', err);
-      });
+        fetch(DIFY_API_URL, {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + DIFY_API_KEY },
+          body: formData
+        })
+        .then(function(r) { return r.json(); })
+        .then(handleReply)
+        .catch(handleError);
+      } else {
+        // 純文字 → 用 JSON
+        fetch(DIFY_API_URL, {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + DIFY_API_KEY,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            inputs: {},
+            query: query,
+            response_mode: 'blocking',
+            conversation_id: '',
+            user: 'miglow-web'
+          })
+        })
+        .then(function(r) { return r.json(); })
+        .then(handleReply)
+        .catch(handleError);
+      }
     } else {
       // 無 API 設定：模擬已離線
       setTimeout(function() {
@@ -218,6 +213,21 @@
 
     sendBtn.disabled = false;
   };
+
+  function handleReply(data) {
+    var loading = document.querySelector('.mc-dots');
+    if (loading) loading.closest('.mc-msg').remove();
+    var reply = data && data.answer;
+    if (!reply) reply = '⋯抱歉，小離沒有回應。';
+    appendBotMsg(reply);
+  }
+
+  function handleError(err) {
+    var loading = document.querySelector('.mc-dots');
+    if (loading) loading.closest('.mc-msg').remove();
+    appendBotMsg('⋯連線失敗，請稍後再試。');
+    console.error('Dify error:', err);
+  }
 
   function appendBotMsg(text) {
     var div = document.createElement('div');
