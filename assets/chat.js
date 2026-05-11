@@ -166,48 +166,54 @@
       var query = text || (uploaded ? '(圖片)' : '');
 
       if (uploaded) {
-        // 有圖片 → 轉 base64 用 JSON 傳
-        var reader = new FileReader();
-        reader.onloadend = function(e) {
-          var base64 = e.target.result;
-          var body = {
-            inputs: {},
-            query: query,
-            response_mode: 'blocking',
-            conversation_id: '',
-            user: 'miglow-web',
-            files: [{
-              type: 'image',
-              transfer_method: 'base64',
-              base64: base64
-            }]
-          };
-          fetch(DIFY_API_URL, {
+        // 有圖片 → 先上傳到 Dify 拿 file_id，再送訊息
+        var formData = new FormData();
+        formData.append('file', uploaded, uploadedName);
+        formData.append('user', 'miglow-web');
+
+        fetch('https://api.dify.ai/v1/files/upload', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + DIFY_API_KEY },
+          body: formData
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(fileData) {
+          var fileId = fileData && fileData.id;
+          if (!fileId) throw new Error('Upload failed: ' + JSON.stringify(fileData));
+          return fetch(DIFY_API_URL, {
             method: 'POST',
             headers: {
               'Authorization': 'Bearer ' + DIFY_API_KEY,
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(body)
-          })
-          .then(function(r) {
-            return r.json();
-          })
-          .then(function(data) {
-            document.querySelector('.mc-dots')?.closest('.mc-msg')?.remove();
-            var reply = data && data.answer;
-            if (!reply) reply = '⋯抱歉，小離沒有回應。';
-            appendBotMsg(reply);
-            sendBtn.disabled = false;
-          })
-          .catch(function(err) {
-            document.querySelector('.mc-dots')?.closest('.mc-msg')?.remove();
-            appendBotMsg('⋯連線失敗，請稍後再試。');
-            console.error('Dify error:', err);
-            sendBtn.disabled = false;
+            body: JSON.stringify({
+              inputs: {},
+              query: query,
+              response_mode: 'blocking',
+              conversation_id: '',
+              user: 'miglow-web',
+              files: [{
+                type: 'image',
+                transfer_method: 'local_file',
+                upload_file_id: fileId
+              }]
+            })
           });
-        };
-        reader.readAsDataURL(uploaded);
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          document.querySelector('.mc-dots')?.closest('.mc-msg')?.remove();
+          var reply = data && data.answer;
+          if (!reply) reply = '⋯抱歉，小離沒有回應。';
+          appendBotMsg(reply);
+          sendBtn.disabled = false;
+        })
+        .catch(function(err) {
+          document.querySelector('.mc-dots')?.closest('.mc-msg')?.remove();
+          appendBotMsg('⋯圖片上傳失敗，請稍後再試。');
+          console.error('Dify upload error:', err);
+          sendBtn.disabled = false;
+        });
       } else {
         // 純文字 → 用 JSON
         fetch(DIFY_API_URL, {
