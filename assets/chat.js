@@ -260,6 +260,8 @@
 
 
   function appendBotMsg(text) {
+    // 過濾 Dify 的思考過程 <think>...</think>
+    text = text.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
     var div = document.createElement('div');
     div.className = 'mc-msg bot';
     div.textContent = text;

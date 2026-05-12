@@ -325,6 +325,20 @@
   }
 })();
 </script>
+<script>
+(function(){
+  var menu = document.getElementById('main-menu');
+  if (!menu) return;
+  var page = window.location.pathname.split('/').pop() || 'index.html';
+  var links = menu.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href') === page) {
+      links[i].className = 'active';
+      break;
+    }
+  }
+})();
+</script>
 
   <main class="register-area">
     <section class="brand-side">
