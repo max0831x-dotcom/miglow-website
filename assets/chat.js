@@ -262,9 +262,16 @@
   function appendBotMsg(text) {
     // 過濾 Dify 的思考過程 <think>...</think>
     text = text.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    // 簡單 markdown 轉 HTML
+    text = text
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\n/g, '<br>');
     var div = document.createElement('div');
     div.className = 'mc-msg bot';
-    div.textContent = text;
+    div.innerHTML = text;
     var time = document.createElement('div');
     time.className = 'time';
     time.textContent = new Date().toLocaleTimeString('zh-TW', {hour:'2-digit',minute:'2-digit'});
